@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+
+<style type="text/css">
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        html,body{
+            width:100%;
+            height:100%;
+            overflow-y: hidden;
+        }
+
+        .container{
+            width:100%;
+            height:100%;
+        }
+
+        .body-container{
+            min-width:1000px;
+            height:100%;
+            position:relative;
+        }
+
+        .container  .header{
+            border-bottom: 3px solid black;
+            max-width:100%;
+            min-width:1000px;
+            height:100px;
+            background-color: #66CCCC;
+        }
+
+        .container .left-container{
+            /*overflow: scroll;*/
+            min-width: 150px;
+            height:100%;
+            position:absolute;
+            left: 0;
+            background-color:#FFFFCC;
+        }
+
+        .container .left-container ul {
+            list-style: none;
+            width:100%;
+            height:auto;
+        }
+
+        .container .left-container ul li{
+            width:100%;
+            height:40px;
+            line-height: 40px;
+            text-align: center;
+            
+        }
+
+        .container .left-container ul li:hover{
+            background-color: #9999FF;
+            cursor: pointer;
+        }
+
+        .container .right-container{
+            border-left: 3px solid black;
+            padding:15px;
+            background-color: #CCFFCC;
+            height:100%;
+            margin-left:150px;
+            overflow: scroll;
+        }
+		#headtext {
+            padding-top: 30px;
+            font-size: 40px;
+            color: white;
+        }
+         td{
+             width:200px;
+             height:60px;
+             text-align:center;
+
+         }
+    th{
+        height:60px;
+
+    }
+    #name{
+        position: fixed;
+        top: 1em;
+        right: 1em;
+        font-size: 20px;
+        color:white;
+    }
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<body>
+
+  <div class="container" id="app">
+       <div class="header">
+           <div id="headtext">&nbsp;&nbsp;后台管理系统</div>
+              <div id="name">
+                  <p v-test>{{ name }}</p>
+                  <input type="button" value="退出" @click="logout"/>
+              </div>
+       </div>
+      <div class="body-container">
+          <div class="left-container">
+              <ul>
+                  <li v-show="a" @click="getUserList()">用户管理</li>
+                  <li v-show="b" @click="getCustomerList()">顾客管理</li>
+                  <li v-show="c" @click="getProductList()">商品管理</li>
+              </ul>
+          </div>
+          <div class="right-container" >
+              <h2 v-show="userSee">用户管理&nbsp;&nbsp;
+                  <input type="button" id="save1" value="添加管理员" @click="save1()" style="width:90px;height:32px"/>
+              </h2>
+              <h2 v-show="CustomerSee">顾客管理&nbsp;&nbsp;
+                  <input type="button" id="save2" value="添加顾客" @click="save2()" style="width:100px;height:30px"/>
+              </h2>
+              <h2 v-show="productSee">商品管理&nbsp;&nbsp;
+                  <input type="button" id="save3" value="添加商品" @click="save3()" style="width:100px;height:30px"/>
+              </h2>
+              <br/>
+    <table v-show="userSee" border="1" style="border-collapse: collapse">
+                  <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>用户名</th>
+                      <th>密码</th>
+                      <th>角色</th>
+                      <th>角色代码</th>
+                      <th>操作</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr v-for="item in ulist" :key="item.id">
+                      <td>{{ item.id }}</td>
+                      <td>{{item.username}}</td>
+                      <td>{{item.password}}</td>
+                      <td>{{item.rolesList[0].roleName}}</td>
+                      <td>{{item.roleId}}</td>
+                      <td><input type="button" value="删除" @click="del1(item.id)" style="width:50px;height:30px"/>
+                          &nbsp;&nbsp;<input type="button" value="更新" @click="update1(item.id)" style="width:50px;height:30px"/>
+                          </td>
+                  </tr>
+                  </tbody>
+              </table>
+
+              <table v-show="CustomerSee" border="1" style="border-collapse: collapse">
+                  <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>用户名</th>
+                      <th>密码</th>
+                      <th>年龄</th>
+                      <th>城市</th>
+                      <th>操作</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr v-for="item in clist" :key="item.id">
+                      <td>{{ item.id }}</td>
+                      <td>{{item.cName}}</td>
+                      <td>{{item.cPassword}}</td>
+                      <td>{{item.age}}</td>
+                      <td>{{item.address}}</td>
+                      <td><input type="button" value="删除" @click="del2(item.id)" style="width:50px;height:30px"/>
+                          &nbsp;&nbsp;<input type="button" value="更新" @click="update2(item.id)" style="width:50px;height:30px"/>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+              <table v-show="productSee" border="1" style="border-collapse: collapse">
+                  <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>商品</th>
+                      <th>品牌</th>
+                      <th>价格</th>
+                      <th>数量</th>
+                      <th>操作</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr v-for="item in plist" :key="item.id">
+                      <td>{{ item.id }}</td>
+                      <td>{{item.commodity}}</td>
+                      <td>{{item.brand}}</td>
+                      <td>{{item.price}}</td>
+                      <td>{{item.amount}}</td>
+                      <td><input type="button" value="删除" @click="del3(item.id)" style="width:50px;height:30px"/>
+                          <input type="button" value="更新" @click="update3(item.id)" style="width:50px;height:30px"/>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+
+  <script>
+      var name = sessionStorage.getItem('roleName');
+      var vm = new Vue({
+          el:'#app',
+          data:{
+              plist:[],
+              ulist:[],
+              clist:[],
+              productSee:false,
+              userSee:false,
+              CustomerSee:false,
+              name:name,
+              a:false,
+              b:false,
+              c:false
+          },
+         mounted:function(){
+                this.show();
+         },
+          methods: {
+              show: function () {
+                  var that = this;
+                  if (name == "主管理员") {
+                      that.a = true;
+                      that.b = true;
+                      that.c = true;
+                      that.getUserList();
+                  }
+                  if (name == "商品管理员") {
+                      that.c = true;
+                      that.getProductList();
+                  }
+                  if (name == "用户管理员") {
+                      that.b = true;
+                      that.getCustomerList();
+                  }
+              },
+              getUserList: function () {
+                  var that = this;
+                  axios.get('User/findUserAndRoles')
+                      .then(function (response) {
+                          that.productSee = false;
+                          that.CustomerSee = false;
+                          that.userSee = true;
+                          that.ulist = response.data;
+                      }, function (err) {
+                      })
+              },
+              getCustomerList: function () {
+                  var that = this;
+                  axios.get('Customer/findAllCustomer')
+                      .then(function (response) {
+                          that.productSee = false;
+                          that.userSee = false;
+                          that.CustomerSee = true;
+                          console.log(response.data)
+                          that.clist = response.data;
+                      }, function (err) {
+                      })
+              },
+              getProductList: function () {
+                  var that = this;
+                  axios.get('Product/findAllProduct')
+                      .then(function (response) {
+                          that.userSee = false;
+                          that.CustomerSee = false;
+                          that.productSee = true;
+                          that.plist = response.data
+                      }, function (err) {
+                      })
+              },
+              del1: function (id) {
+                  var that = this;
+                  axios({
+                      method: "post",
+                      url: "/User/deleteUser",
+                      data: {
+                          id
+                      }
+                  }).then(function (response) {
+                      that.getUserList()
+                  }, function (err) {
+                  })
+              },
+              del2: function (id) {
+                  var that = this;
+                  axios({
+                      method: "post",
+                      url: "/Customer/deleteCustomer",
+                      data: {
+                          id
+                      }
+                  }).then(function (response) {
+                      that.getCustomerList();
+                  }, function (err) {
+
+                  })
+              },
+              del3: function (id) {
+                  var that = this;
+                  axios({
+                      method: "post",
+                      url: "/Product/deleteProduct",
+                      data: {
+                          id
+                      }
+                  }).then(function (response) {
+                      that.getProductList();
+                  }, function (err) {
+
+                  })
+              },
+              save1:function () {
+                  window.location.href="saveUser.html";
+              },
+              save2:function () {
+                  window.location.href="saveCustomer.html";
+              },
+              save3:function () {
+                  window.location.href="saveProduct.html";
+              },
+              update1:function (id) {
+                  sessionStorage.setItem('Id',id);
+                  window.location.href="updateUser.html";
+              },
+              update2:function (id) {
+                  sessionStorage.setItem('Id',id);
+                  window.location.href="updateCustomer.html";
+              },
+              update3:function (id) {
+                  sessionStorage.setItem('Id',id);
+                  window.location.href="updateProduct.html";
+              },
+              logout:function () {
+                  var that = this;
+                  axios({
+                      method: "post",
+                      url: "/User/logout",
+                  }).then(function (response) {
+                      sessionStorage.removeItem('roleName');
+                      sessionStorage.removeItem('Id');
+                      window.location.href="index.html";
+                  }, function (err) {
+
+                  })
+              }
+              }
+          })
+  </script>
+
+</body>
+</html>

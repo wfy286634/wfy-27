@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>更新商品信息</title>
+<style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+}
+#wrap {
+	height: 900px;
+	width: 100%;
+    background-color:#CCFFCC;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: relative;
+}
+#head {
+	height: 120px;
+	width: 100%;
+	background-color: #66CCCC;
+	text-align: center;
+	position: relative;
+}
+
+#wrap .logGet {
+	height: 560px;
+	width: 368px;  
+	position: absolute;
+	background-color: #FFFFFF;
+	top: 10%;
+	right: 36%;
+}
+.logC a button {
+	width: 100%;
+	height: 45px;
+	background-color: #ee7700;
+	border: none;
+	color: white;
+	font-size: 18px;
+}
+.logGet .logD.logDtip .p1 {
+	display: inline-block;
+	font-size: 28px;
+	margin-top: 30px;
+	width: 86%;
+}
+#wrap .logGet .logD.logDtip {
+	width: 86%;
+	border-bottom: 1px solid #ee7700;
+	margin-bottom: 40px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.logGet .lgD input {
+	width: 100%;
+	height: 42px;
+	text-indent: 2.5rem;
+}
+#wrap .logGet .lgD {
+	width: 86%;
+	position: relative;
+	margin-bottom: 30px;
+	margin-top: 30px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#wrap .logGet .logC {
+	width: 86%;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+.title {
+	color: #FFFFFF;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); 
+	font-size: 36px;
+	height: 40px;
+	width: 30%;
+}
+#check{
+    font-size: 18px;
+    margin-bottom:20px;
+	margin-left: 30px;
+ }
+</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+	<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+</head>
+ 
+<body>
+<div class="header" id="head">
+  <div class="title">后台管理系统</div>
+	
+</div>
+	
+<div class="wrap" id="wrap">
+	<div class="logGet">
+
+			<div class="logD logDtip">
+				<p class="p1">更新商品信息</p>
+			</div>
+			<div class="lgD">客户名
+				<input type="text" v-model="cName"
+					placeholder="输入客户名" />
+			</div>
+			<div class="lgD">密码
+				<input type="text" v-model="cPassword"
+					placeholder="输入客户密码" />
+			</div>
+			<div class="lgD">年龄
+				<input type="text" v-model="age"
+					placeholder="输入客户年龄" />
+			</div>
+			<div class="lgD">地址
+				<input type="text" v-model="address"
+					placeholder="输入客户地址" />
+			</div>
+
+			<div class="logC">
+				<a><button @click="save">更 新</button></a>
+			</div>
+		</div>
+</div>	
+</div>
+<script type="text/javascript">
+	var id  = sessionStorage.getItem('Id');
+    var app =new Vue({
+     el: '#wrap',
+       data: {
+          cName: "",
+          cPassword: "",
+          age:"",
+		  address:"",
+		  id:id
+       },
+	  mounted:function(){
+     	cid=this.id;
+     	console.log(cid);
+     	this.findById(cid);
+	  },
+     methods: {
+		 save: function () {
+			 let that = this;
+			 axios({
+				 method: "post",
+				 url: "/Customer/updateCustomer",
+				 data: {
+				 	    id:that.id,
+				 cName:that.cName,
+				 cPassword: that.cPassword,
+				 age: that.age,
+				 address: that.address,
+				 }
+			 }).then(function (response) {
+				 if (response.data == true) {
+					 console.log(response.data)
+					 alert("更新成功 ！！！")
+					 window.location.href = "main.html"
+				 }
+			 }, function (err) {
+				 console.log(err.data)
+			 })
+		 },
+		 findById: function (cid) {
+			 let that = this;
+			 axios({
+				 method: "post",
+				 url: "/Customer/findCustomerById",
+				 data: {
+					 id
+				 }
+			 }).then(function (response) {
+				 that.cName = response.data.cName;
+				 that.cPassword = response.data.cPassword;
+				 that.age = response.data.age;
+				 that.address = response.data.address;
+			 }, function (err) {
+
+			 })
+		 }
+	 }
+      })
+
+</script>
+</body>
+</html>

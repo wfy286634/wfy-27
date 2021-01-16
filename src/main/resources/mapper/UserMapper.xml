@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wfy.mapper.UserMapper">
+    <resultMap id="UserMap" type="com.wfy.pojo.User">
+        <id property="id" column="uId"/>
+        <result property="username" column="uName"/>
+        <result property="password" column="uPassword"/>
+        <result property="roleId" column="rId"/>
+        <collection property="rolesList" ofType="com.wfy.pojo.Roles">
+            <id property="id" column="roId"/>
+            <result property="roleName" column="rName"/>
+        </collection>
+    </resultMap>
+
+    <select id="findUserAndRoles" resultMap="UserMap">
+        SELECT
+	      u.id uId,
+	      u.username uName,
+	      u.password uPassword,
+	      u.roleId rId,
+	      r.roleName rName
+       FROM
+	      USER u,
+	      roles r
+       WHERE
+	      u.roleId = r.id
+    </select>
+
+    <insert id="saveUser" parameterType="com.wfy.pojo.User">
+         insert into user(username,password,roleId)
+                values(#{username},#{password},#{roleId})
+    </insert>
+
+    <update id="updateUser" parameterType="com.wfy.pojo.User">
+        update user
+        <set>
+            <if test="username != ''">
+                username=#{username},
+            </if>
+            <if test="password!= ''">
+                password=#{password},
+            </if>
+            <if test="roleId != ''">
+                roleId=#{roleId},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id=#{id};
+    </delete>
+    
+    <select id="findByName" parameterType="String" resultMap="UserMap">
+       SELECT
+	      u.id uId,
+	      u.username uName,
+	      u.password uPassword,
+	      u.roleId rId,
+	      r.roleName rName
+       FROM
+	      USER u,
+	      roles r
+       WHERE
+	      u.roleId = r.id
+	    and
+	    u.username=#{username}
+	    and
+	    u.password=#{password}
+    </select>
+
+    <select id="findUserById" resultType="com.wfy.pojo.User">
+       SELECT * FROM USER WHERE id=#{id}
+    </select>
+</mapper>

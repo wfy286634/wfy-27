@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wfy.mapper.ProductMapper">
+
+    <select id="findAllProduct" resultType="com.wfy.pojo.Product">
+         select * from product
+    </select>
+
+    <insert id="saveProduct" parameterType="com.wfy.pojo.Product">
+         insert into product(commodity,brand,price,amount)
+                values(#{commodity},#{brand},#{price},#{amount})
+    </insert>
+
+    <update id="updateProduct" parameterType="com.wfy.pojo.Product">
+        update product
+        <set>
+            <if test="commodity != ''">
+                commodity=#{commodity},
+            </if>
+            <if test="brand!= ''">
+                brand=#{brand},
+            </if>
+            <if test="brand != ''">
+                brand=#{brand},
+            </if>
+            <if test="amount != ''">
+                amount=#{amount},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteProduct" parameterType="int">
+        delete from product where id=#{id};
+    </delete>
+
+    <select id="findProductById" resultType="com.wfy.pojo.Product">
+       SELECT * FROM product WHERE id=#{id}
+    </select>
+
+</mapper>
