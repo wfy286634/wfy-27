@@ -99,11 +99,12 @@
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
 <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<script src="js/interceptor.js" type="text/javascript"></script>
 <body>
 
   <div class="container" id="app">
        <div class="header">
-           <div id="headtext">&nbsp;&nbsp;后台管理系统</div>
+           <div id="headtext">&nbsp;&nbsp;商城后台管理系统</div>
               <div id="name">
                   <p v-test>{{ name }}</p>
                   <input type="button" value="退出" @click="logout"/>
@@ -206,7 +207,42 @@
   </div>
 
   <script>
+      Vue.prototype.$http=axios;  //给axios配置原型（全局使用）
+      axios.defaults.baseURL='http://localhost:8080/'; //给axios请求设置访问后台的前缀
+
+      //!**************前台拦截器**************
+
+      //1 使用axios前置拦截器，让所有的请求都携带uToken
+      axios.interceptors.request.use(config=>{
+          //1.1 获取到浏览器里面一直存储的token，并将它放到
+          let uToken =  localStorage.getItem("uToken");
+          if(uToken){
+              //1.2 注意：给请求头里面添加u-token（后台判断就是取的这个请求头）请求头，并把随机数的token值也设置进去
+              config.headers['token']=uToken;
+          }
+          //1.3 必须要返回这个，才能执行后面代码
+          return config;
+      },error => {
+          Promise.reject(error);
+      });
+
+      //!**********
+
+      //2 使用axios设置后置拦截器，处理后台被拦截，没有登录的请求
+      axios.interceptors.response.use(function (result){
+          let data = result.data;
+          //只要前台被拦截的请求里面含这两个参数，那么就跳转到登录界面
+          if(!data.success && data.msg==="NoUser"){
+              window.location.href = "index.html";
+          }
+          return result;
+      },error => {
+          Promise.reject(error);
+      });
+
+
       var name = sessionStorage.getItem('roleName');
+      let token =  localStorage.getItem("uToken");
       var vm = new Vue({
           el:'#app',
           data:{
@@ -217,6 +253,7 @@
               userSee:false,
               CustomerSee:false,
               name:name,
+              token:token,
               a:false,
               b:false,
               c:false
@@ -244,7 +281,13 @@
               },
               getUserList: function () {
                   var that = this;
-                  axios.get('User/findUserAndRoles')
+                  axios({
+                      method: "post",
+                      url: "User/findUserAndRoles",
+                      data: {
+                      }
+                  })
+                      //.get('User/findUserAndRoles')
                       .then(function (response) {
                           that.productSee = false;
                           that.CustomerSee = false;
@@ -255,7 +298,13 @@
               },
               getCustomerList: function () {
                   var that = this;
-                  axios.get('Customer/findAllCustomer')
+                  axios({
+                      method: "post",
+                      url: "Customer/findAllCustomer",
+                      data: {
+                      }
+                  })
+                      //.get('Customer/findAllCustomer')
                       .then(function (response) {
                           that.productSee = false;
                           that.userSee = false;
@@ -267,7 +316,13 @@
               },
               getProductList: function () {
                   var that = this;
-                  axios.get('Product/findAllProduct')
+                  axios({
+                      method: "post",
+                      url: "Product/findAllProduct",
+                      data: {
+                      }
+                  })
+                      //.get('Product/findAllProduct')
                       .then(function (response) {
                           that.userSee = false;
                           that.CustomerSee = false;
