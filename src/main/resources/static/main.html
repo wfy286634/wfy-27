@@ -5,8 +5,7 @@
     <title>主页</title>
 </head>
 
-<style type="text/css">
-
+<!--<style type="text/css">
         *{
                 margin: 0;
                 padding: 0;
@@ -68,7 +67,7 @@
         .container .right-container{
             border-left: 3px solid black;
             padding:15px;
-            background-color: #CCFFCC;
+            background-color: #d1ffd1;
             height: 100%;
             margin-left: 180px;
             overflow: scroll;
@@ -95,14 +94,14 @@
             font-size: 20px;
             color:white;
         }
-        table {
+        /*table {
             table-layout:fixed;
             width:100%;
             border-collapse: collapse;
         }
         table tr:hover {
             background-color: #a0d2c4;
-        }
+        }*/
         .table-top{
             background-color:cornflowerblue;
         }
@@ -156,11 +155,11 @@
         .button1 {
             background-color: white;
             color: black;
-            border: 2px solid #4CAF50;
+            border: 2px solid #5baab1;
         }
 
         .button1:hover {
-            background-color: #4CAF50;
+            background-color: #5baab1;
             color: white;
         }
 
@@ -198,18 +197,126 @@
         .button5:hover {background-color: #e7e7e7;}
         .button4:hover {background-color: #e7e7e7;}
         .button2:hover {background-color: #e7e7e7;}
+        .button6 {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #7dbc8c;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 12px;
+            padding: 4.5px;
+            width: 90px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
 
-</style>
+        .button6 span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .button6 span:after {
+            content: '»';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .button6:hover span {
+            padding-right: 25px;
+        }
+
+        .button6:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+        .buttonx {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 2px 6px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        .button7 {
+            background-color: white;
+            color: #000000;
+            border: 1px solid #f44336;
+            border-radius: 8px;
+        }
+
+        .button7:hover {
+            background-color: #f44336;
+            color: white;
+        }
+        .button8 {
+            background-color: white;
+            color: black;
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+        }
+
+        .button8:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+
+
+        table
+        {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+            table-layout:fixed;
+            width:100%;
+        }
+        table td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: #000000;
+        }
+        table thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+        table tr:nth-child(odd)
+        {
+            background: #fff;
+        }
+        table tr:nth-child(even)
+        {
+            background: #F5FAFA;
+        }
+        table tr:hover {
+            background-color: #a0d2c4;
+        }
+</style>-->
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
 <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<script type="text/javascript" src="js/interceptors.js"></script>
 <body>
 
   <div class="container" id="app">
        <div class="header">
            <div id="headtext">&nbsp;&nbsp;商城后台管理系统</div>
               <div id="name">
-                  <p v-test>{{ name }}</p>
-                  <input type="button" value="退出" @click="logout"/>
+                  <p v-test>&nbsp;{{ name }}</p>
+                  <button class="button6" @click="logout" style="vertical-align:middle;background-color: #8a86865c"><span>退出</span></button>
               </div>
        </div>
       <div class="body-container">
@@ -221,17 +328,18 @@
               </ul>
           </div>
           <div class="right-container">
-              <h2 v-show="userSee">用户管理&nbsp;&nbsp;
-                  <input type="button" id="save1" value="添加管理员" @click="save1()" style="width:90px;height:32px"/>
+              <h2 v-show="userSee" style="margin-bottom: 5px">用户管理&nbsp;
+                  <button class="button6" id="save1" @click="save1()" style="vertical-align:middle"><span>添加用户</span></button>
               </h2>
-              <h2 v-show="CustomerSee">顾客管理&nbsp;&nbsp;
-                  <input type="button" id="save2" value="添加顾客" @click="save2()" style="width:100px;height:30px"/>
+              <h2 v-show="CustomerSee" style="margin-bottom: 5px">顾客管理&nbsp;
+                  <button class="button6" id="save2" @click="save2()" style="vertical-align:middle"><span>添加顾客</span></button>
               </h2>
-              <h2 v-show="productSee">商品管理&nbsp;&nbsp;
-                  <input type="button" id="save3" value="添加商品" @click="save3()" style="width:100px;height:30px"/>
+              <h2 v-show="productSee" style="margin-bottom: 5px">商品管理&nbsp;
+                  <button class="button6" id="save3" @click="save3()" style="vertical-align:middle"><span>添加商品</span></button>
               </h2>
-              <br/>
-              <table v-show="userSee" border="1" style="border-collapse: collapse">
+              <hr style=" border-top:3px double #79a587;">
+              <br>
+              <table v-show="userSee" border="1" >
                   <thead>
                   <tr class="table-top">
                       <th>ID</th>
@@ -249,8 +357,9 @@
                       <td>{{item.password}}</td>
                       <td>{{item.rolesList[0].roleName}}</td>
                       <td>{{item.roleId}}</td>
-                      <td><input type="button" value="删除" @click="del1(item.id)" style="width:50px;height:30px"/>
-                          &nbsp;&nbsp;<input type="button" value="更新" @click="update1(item.id)" style="width:50px;height:30px"/>
+                      <td>
+                          <button class="buttonx button7" @click="del1(item.id)">删除</button>
+                          &nbsp;&nbsp;<button class="buttonx button8" @click="update1(item.id)">编辑</button>
                           </td>
                   </tr>
                   <tr>
@@ -287,14 +396,15 @@
                       <td>{{item.cPassword}}</td>
                       <td>{{item.age}}</td>
                       <td>{{item.address}}</td>
-                      <td><input type="button" value="删除" @click="del2(item.id)" style="width:50px;height:30px"/>
-                          &nbsp;&nbsp;<input type="button" value="更新" @click="update2(item.id)" style="width:50px;height:30px"/>
+                      <td>
+                          <button class="buttonx button7" @click="del2(item.id)">删除</button>
+                          &nbsp;&nbsp;<button class="buttonx button8" @click="update2(item.id)">编辑</button>
                       </td>
                   </tr>
                   <tr>
                       <td colspan="6">
                           <div style="float: left">
-                              <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{upages.customerTotal}}</span>>条数据</button>
+                              <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{cpages.customerTotal}}</span>>条数据</button>
                           </div>
                           <div class="pageList">
                               <button class="button button1" @click="down2">上一页</button>
@@ -324,14 +434,14 @@
                       <td>{{item.brand}}</td>
                       <td>{{item.price}}</td>
                       <td>{{item.amount}}</td>
-                      <td><input type="button" value="删除" @click="del3(item.id)" style="width:50px;height:30px"/>
-                          <input type="button" value="更新" @click="update3(item.id)" style="width:50px;height:30px"/>
+                      <td><button class="buttonx button7" @click="del3(item.id)">删除</button>
+                          &nbsp;&nbsp;<button class="buttonx button8" @click="update3(item.id)">编辑</button>
                       </td>
                   </tr>
                   <tr>
                       <td colspan="6">
                           <div style="float: left">
-                              <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{upages.productTotal}}</span>>条数据</button>
+                              <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{ppages.productTotal}}</span>>条数据</button>
                           </div>
                           <div class="pageList">
                                   <button class="button button1" @click="down3">上一页</button>
@@ -348,40 +458,6 @@
   </div>
 
   <script>
-      Vue.prototype.$http=axios;  //给axios配置原型（全局使用）
-      axios.defaults.baseURL='http://localhost:8080/'; //给axios请求设置访问后台的前缀
-
-      //!**************前台拦截器**************
-
-      //1 使用axios前置拦截器，让所有的请求都携带uToken
-      axios.interceptors.request.use(config=>{
-          //1.1 获取到浏览器里面一直存储的token，并将它放到
-          let uToken =  localStorage.getItem("uToken");
-          if(uToken){
-              //1.2 注意：给请求头里面添加u-token（后台判断就是取的这个请求头）请求头，并把随机数的token值也设置进去
-              config.headers['token']=uToken;
-          }
-          //1.3 必须要返回这个，才能执行后面代码
-          return config;
-      },error => {
-          Promise.reject(error);
-      });
-
-      //!**********
-
-      //2 使用axios设置后置拦截器，处理后台被拦截，没有登录的请求
-      axios.interceptors.response.use(function (result){
-          let data = result.data;
-          //只要前台被拦截的请求里面含这两个参数，那么就跳转到登录界面
-          if(!data.success && data.msg==="NoUser"){
-              window.location.href = "index.html";
-          }
-          return result;
-      },error => {
-          Promise.reject(error);
-      });
-
-
       var name = sessionStorage.getItem('roleName');
       let token =  localStorage.getItem("uToken");
       var vm = new Vue({
@@ -680,7 +756,7 @@
                       }
                   }).then(function (response) {
                       that.getCustomerList();
-                      that.getUserPages();
+                      that.getCustomerPages();
                       that.count2=1;
                   }, function (err) {
 
@@ -696,7 +772,7 @@
                       }
                   }).then(function (response) {
                       that.getProductList();
-                      that.getUserPages();
+                      that.getProductPages();
                       that.count3=1;
                   }, function (err) {
 
