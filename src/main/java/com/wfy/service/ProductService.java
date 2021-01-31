@@ -8,6 +8,8 @@ public interface ProductService {
 
     List<Product> findAllProduct();
 
+    List<Product> findByLimit(int limit);
+
     Product findProductById (int id);
 
     void saveProduct(Product product);

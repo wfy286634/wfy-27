@@ -12,6 +12,8 @@ public interface UserMapper {
 
     List<User> findUserAndRoles();
 
+    List<User> findUserByLimit(int limit);
+
     void saveUser(User user);
 
     void updateUser(User user);
@@ -21,5 +23,7 @@ public interface UserMapper {
     User findUserById(int id);
 
     User findByName(String username,String password);
+
+    int userCount();
 
 }

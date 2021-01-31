@@ -8,8 +8,37 @@ public class User {
     private String username;
     private String password;
     private Integer roleId;
-
     private List<Roles> rolesList;
+
+    private String token;
+
+    private String msg;
+
+    private Integer number;
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public List<Roles> getRolesList() {
         return rolesList;
@@ -58,6 +87,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", roleId=" + roleId +
+                ", token='" + token + '\'' +
                 ", rolesList=" + rolesList +
                 '}';
     }

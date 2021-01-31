@@ -1,7 +1,6 @@
 package com.wfy.mapper;
 
 import com.wfy.pojo.Customer;
-import com.wfy.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +19,9 @@ public interface CustomerMapper {
     void updateCustomer(Customer customer);
 
     void deleteCustomer(int id);
+
+    List<Customer> findAllCustomerByLimit(int limit);
+
+    int customerCount();
 
 }

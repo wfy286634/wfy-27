@@ -5,7 +5,7 @@
 <mapper namespace="com.wfy.mapper.CustomerMapper">
 
     <select id="findAllCustomer" resultType="com.wfy.pojo.Customer">
-         select * from customer
+         select * from customer limit 0,10
     </select>
 
     <insert id="saveCustomer" parameterType="com.wfy.pojo.Customer">
@@ -38,6 +38,12 @@
 
     <select id="findCustomerById" resultType="com.wfy.pojo.Customer">
        SELECT * FROM customer WHERE id=#{id}
+    </select>
+    <select id="findAllCustomerByLimit" parameterType="integer" resultType="com.wfy.pojo.Customer">
+        select * from customer limit #{limit},10
+    </select>
+    <select id="customerCount" resultType="java.lang.Integer">
+        select count(id) from customer
     </select>
 
 </mapper>

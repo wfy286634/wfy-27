@@ -1,7 +1,6 @@
 package com.wfy.service;
 
 import com.wfy.pojo.Customer;
-import com.wfy.pojo.User;
 
 import java.util.List;
 
@@ -16,4 +15,6 @@ public interface CustomerService {
     void updateCustomer(Customer customer);
 
     void deleteCustomer(int id);
+
+    List<Customer> findByLimit(int limit);
 }

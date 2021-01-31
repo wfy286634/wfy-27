@@ -13,6 +13,8 @@ public interface ProductMapper {
 
     List<Product> findAllProduct();
 
+    List<Product> findByLimit(int limit);
+
     Product findProductById (int id);
 
     void saveProduct(Product product);
@@ -20,4 +22,7 @@ public interface ProductMapper {
     void updateProduct(Product product);
 
     void deleteProduct(int id);
+
+    int productCount();
 }
+

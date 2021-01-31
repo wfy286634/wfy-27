@@ -5,7 +5,11 @@
 <mapper namespace="com.wfy.mapper.ProductMapper">
 
     <select id="findAllProduct" resultType="com.wfy.pojo.Product">
-         select * from product
+         select * from product limit 0,10
+    </select>
+
+    <select id="findByLimit" parameterType="integer" resultType="com.wfy.pojo.Product">
+        select * from product limit #{limit},10
     </select>
 
     <insert id="saveProduct" parameterType="com.wfy.pojo.Product">
@@ -38,6 +42,9 @@
 
     <select id="findProductById" resultType="com.wfy.pojo.Product">
        SELECT * FROM product WHERE id=#{id}
+    </select>
+    <select id="productCount" resultType="java.lang.Integer">
+        select count(id) from product
     </select>
 
 </mapper>

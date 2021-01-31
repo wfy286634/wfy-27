@@ -17,6 +17,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUserAndRoles() {
         List<User> userAndRoles = userMapper.findUserAndRoles();
+        for (int i = 0; i < userAndRoles.size(); i++) {
+            userAndRoles.get(i).setNumber(i+1);
+        }
+
         return userAndRoles;
     }
 
@@ -34,6 +38,15 @@ public class UserServiceImpl implements UserService {
             return user;
         }
          return null;
+    }
+
+    @Override
+    public List<User> findByLimit(int limit) {
+        List<User> userAndRoles = userMapper.findUserByLimit(limit);
+        for (int i = 0; i < userAndRoles.size(); i++) {
+            userAndRoles.get(i).setNumber(i+1);
+        }
+        return userAndRoles;
     }
 
     @Override

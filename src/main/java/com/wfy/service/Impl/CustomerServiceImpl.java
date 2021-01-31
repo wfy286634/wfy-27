@@ -2,7 +2,6 @@ package com.wfy.service.Impl;
 
 import com.wfy.mapper.CustomerMapper;
 import com.wfy.pojo.Customer;
-import com.wfy.pojo.User;
 import com.wfy.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +14,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerMapper customerMapper;
 
+
     @Override
     public List<Customer> findAllCustomer() {
-        return customerMapper.findAllCustomer();
+        List<Customer> allCustomer = customerMapper.findAllCustomer();
+        for (int i = 0; i < allCustomer.size(); i++) {
+            allCustomer.get(i).setNumber(i+1);
+        }
+        return allCustomer;
     }
 
     @Override
@@ -38,5 +42,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomer(int id) {
         customerMapper.deleteCustomer(id);
+    }
+
+    @Override
+    public List<Customer> findByLimit(int limit) {
+        List<Customer> allCustomer = customerMapper.findAllCustomerByLimit(limit);
+        for (int i = 0; i < allCustomer.size(); i++) {
+            allCustomer.get(i).setNumber(i+1);
+        }
+        return allCustomer;
     }
 }

@@ -14,9 +14,22 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
 
+
     @Override
     public List<Product> findAllProduct() {
         List<Product> list = productMapper.findAllProduct();
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setNumber(i+1);
+        }
+        return list;
+    }
+
+    @Override
+    public List<Product> findByLimit(int limit) {
+        List<Product> list = productMapper.findByLimit(limit);
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setNumber(i+1);
+        }
         return list;
     }
 

@@ -26,6 +26,7 @@
 	      roles r
        WHERE
 	      u.roleId = r.id
+       LIMIT 0,10;
     </select>
 
     <insert id="saveUser" parameterType="com.wfy.pojo.User">
@@ -73,5 +74,22 @@
 
     <select id="findUserById" resultType="com.wfy.pojo.User">
        SELECT * FROM USER WHERE id=#{id}
+    </select>
+    <select id="findUserByLimit" parameterType="integer" resultMap="UserMap">
+        SELECT
+            u.id uId,
+            u.username uName,
+            u.password uPassword,
+            u.roleId rId,
+            r.roleName rName
+        FROM
+            USER u,
+            roles r
+        WHERE
+            u.roleId = r.id
+        limit #{limit},10
+    </select>
+    <select id="userCount" resultType="java.lang.Integer">
+        select count(id) from USER
     </select>
 </mapper>

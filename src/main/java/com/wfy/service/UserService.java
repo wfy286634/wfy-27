@@ -17,4 +17,6 @@ public interface UserService {
     User findUserById(int id);
 
     User findByName(String username,String password);
+
+    List<User> findByLimit(int limit);
 }
