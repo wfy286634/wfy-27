@@ -144,6 +144,21 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
+     * @Author wfy
+     * @Description: object转string(如果object为null则返回 "null" 字符串)
+     * @param object
+     * @return String
+     * @Date 16:01 2021/02/03
+     **/
+    public static String toString(Object object)
+    {
+        if (isNull(object)){
+            return "null";
+        }
+        return object.toString();
+    }
+
+    /**
      * * 判断一个对象是否是数组类型（Java基本型别的数组）
      *
      * @param object 对象

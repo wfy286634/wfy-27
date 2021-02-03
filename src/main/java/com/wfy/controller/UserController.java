@@ -108,7 +108,7 @@ public class UserController {
 
     @RequestMapping("/logout")
     @ResponseBody
-    public boolean logout(User user,HttpSession session) {
+    public boolean logout(@RequestBody User user,HttpSession session) {
         session.removeAttribute("roleId");
         String token = user.getToken();
         redisUtil.del(token);
@@ -146,10 +146,10 @@ public class UserController {
      **/
     @RequestMapping("/getUserPages")
     @ResponseBody
-    public Map getUserPages() {
+    public Map<String, Integer> getUserPages() {
         int userCount = userMapper.userCount();
         int pages = toolsUtil.dataPages(userCount);
-        HashMap<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
         map.put("pages", pages);
         map.put("userTotal", userCount);
         return map;

@@ -26,11 +26,10 @@ html,body{
     max-width:100%;
     min-width:1000px;
     height:100px;
-    background-color: #66CCCC;
+    background-color: #66cccc;
 }
 
 .container .left-container{
-    /*overflow: scroll;*/
     min-width: 180px;
     height:100%;
     position:absolute;
@@ -87,14 +86,6 @@ th{
     font-size: 20px;
     color:white;
 }
-/*table {
-    table-layout:fixed;
-    width:100%;
-    border-collapse: collapse;
-}
-table tr:hover {
-    background-color: #a0d2c4;
-}*/
 .table-top{
     background-color:cornflowerblue;
 }
@@ -131,7 +122,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
 
 .button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 5px 20px;
@@ -140,7 +131,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
 }
@@ -213,7 +204,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 }
 
 .button6 span:after {
-    content: '»';
+    content: "»";
     position: absolute;
     opacity: 0;
     top: 0;
@@ -230,7 +221,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     right: 0;
 }
 .buttonx {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 2px 6px;
@@ -239,7 +230,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
 }
