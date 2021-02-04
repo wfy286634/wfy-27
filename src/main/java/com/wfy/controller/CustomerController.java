@@ -71,7 +71,6 @@ public class CustomerController {
     @RequestMapping("/findCustomerByLimit")
     @ResponseBody
     public List<Customer> findByLimit(@RequestBody Map map) {
-        System.out.println(map.get("limit"));
         int limit = (int) map.get("limit");
         if(limit<1){
             limit=0;

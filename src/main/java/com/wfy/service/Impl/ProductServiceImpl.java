@@ -36,7 +36,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findProductById(int id) {
         Product productById=productMapper.findProductById(id);
-        System.out.println(productById);
         return productById;
     }
 

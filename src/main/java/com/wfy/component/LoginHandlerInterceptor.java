@@ -17,34 +17,12 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     @Resource
     private RedisUtil redisUtil;
 
-    /*@Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        Object roleId = request.getSession().getAttribute("roleId");
-        System.out.println("afterCompletion----" + roleId + " ::: " + request.getRequestURL());
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        Object roleId = request.getSession().getAttribute("roleId");
-        System.out.println("postHandle----" + roleId + " ::: " + request.getRequestURL());
-
-    }*/
-
    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-       /* Object roleId = request.getSession().getAttribute("roleId");
-        System.out.println("preHandle----" + roleId + " ::: " + request.getRequestURL());
-        if (roleId != null) {
-            return true;
-        }
-        request.getRequestDispatcher("/index.html").forward(request, response);
-        return false;*/
-
-
-
         //不拦截路径（登录路径等等）
-       List<String> asList = Arrays.asList("/","/images/1.jpg","/favicon.ico","/User/login","/index.html","/main.html","/test.html","/saveCustomer.html", "/saveProduct.html",
-               "/saveUser.html","/updateCustomer.html","/updateProduct.html","/updateUser.html","/css/main.css","/js/interceptors.js");
+       List<String> asList = Arrays.asList("/","/images/1.jpg","/User/login","/index.html","/main.html",
+               "/test.html","/saveCustomer.html", "/saveProduct.html", "/saveUser.html","/updateCustomer.html",
+               "/updateProduct.html","/updateUser.html","/css/main.css","/js/interceptors.js");
 
        String uri = request.getRequestURI();
        //1.设置放行路径

@@ -78,7 +78,6 @@ public class UserController {
         String username = map.get("username");
         String password = map.get("password");
         User userMsg = userService.findByName(username, password);
-        System.out.println(userMsg);
         if (StringUtils.isNotNull(userMsg)) {
             if (username.equals(userMsg.getUsername())
                     && password.equals(userMsg.getPassword())) {
@@ -101,7 +100,6 @@ public class UserController {
     @RequestMapping("/findUserById")
     @ResponseBody
     public User findUserById(@RequestBody User user) {
-        System.out.println(user.getId());
         User userById = userService.findUserById(user.getId());
         return userById;
     }

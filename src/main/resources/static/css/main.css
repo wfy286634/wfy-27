@@ -26,7 +26,7 @@ html,body{
     max-width:100%;
     min-width:1000px;
     height:100px;
-    background-color: #66cccc;
+    background-color: #5e6e6e;
 }
 
 .container .left-container{
@@ -34,7 +34,7 @@ html,body{
     height:100%;
     position:absolute;
     left: 0;
-    background-color:#FFFFCC;
+    background-color: #eaf2f7;
 }
 
 .container .left-container ul {
@@ -52,14 +52,14 @@ html,body{
 }
 
 .container .left-container ul li:hover{
-    background-color: #9999FF;
+    background-color: #cfcff1;
     cursor: pointer;
 }
 
 .container .right-container{
     border-left: 3px solid black;
     padding:15px;
-    background-color: #d1ffd1;
+    background-color: #d7e2e9;
     height: 100%;
     margin-left: 180px;
     overflow: scroll;

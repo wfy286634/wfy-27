@@ -60,7 +60,6 @@ public class ProductController {
     @RequestMapping("/findProductById")
     @ResponseBody
     public Product findProductById(@RequestBody Product product) {
-        System.out.println(product.getId());
         Product productById =productService.findProductById(product.getId());
         return productById;
     }
