@@ -4,6 +4,7 @@ package com.wfy.controller;
 import com.alibaba.fastjson.JSON;
 import com.wfy.mapper.UserMapper;
 import com.wfy.pojo.User;
+import com.wfy.service.LoginLogService;
 import com.wfy.service.UserService;
 import com.wfy.utils.RedisUtil;
 import com.wfy.utils.StringUtils;
@@ -14,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/User")
@@ -26,6 +25,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private LoginLogService loginLogService;
 
     @Resource
     private RedisUtil redisUtil;
@@ -74,19 +76,34 @@ public class UserController {
      **/
     @RequestMapping("/login")
     @ResponseBody
-    public User login(@RequestBody Map<String, String> map, HttpSession session) {
+    public User login(@RequestBody Map<String, String> map, HttpServletRequest request) {
         String username = map.get("username");
         String password = map.get("password");
         User userMsg = userService.findByName(username, password);
         if (StringUtils.isNotNull(userMsg)) {
             if (username.equals(userMsg.getUsername())
                     && password.equals(userMsg.getPassword())) {
-                Integer roleId = userMsg.getRoleId();
-                session.setAttribute("roleId", roleId);
                 //使用UUID生成token
                 String token = UUID.randomUUID().toString();
                 //存到redis，并设置20分钟过期时间
                 redisUtil.set(token, JSON.toJSONString(userMsg),60*20);
+
+                //记录登录日志
+                Date now = new Date();
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+                //获取登录用户的IP地址
+                String ip = toolsUtil.getIpAddr(request);
+                //获取角色代码对应的权限名
+                String roleName = toolsUtil.roleCodeToName(userMsg.getRoleId());
+                Map<String, Object> logMap = new HashMap<>();
+                logMap.put("username", username);
+                logMap.put("roleId", userMsg.getRoleId());
+                logMap.put("roleName", roleName);
+                logMap.put("ip",ip);
+                logMap.put("loginDate", dateFormat1.format(now));
+                logMap.put("loginTime", dateFormat2.format(now));
+                loginLogService.addLoginLog(logMap);
                 userMsg.setToken(token);
                 userMsg.setMsg("0");
                 return userMsg;
@@ -106,8 +123,7 @@ public class UserController {
 
     @RequestMapping("/logout")
     @ResponseBody
-    public boolean logout(@RequestBody User user,HttpSession session) {
-        session.removeAttribute("roleId");
+    public boolean logout(@RequestBody User user) {
         String token = user.getToken();
         redisUtil.del(token);
         return true;

@@ -2,6 +2,10 @@ package com.wfy.utils;
 
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 @Component
 public class ToolsUtil {
 
@@ -19,4 +23,59 @@ public class ToolsUtil {
         }
         return i;
     }
+
+    /**
+     * @Author wfy
+     * @Description: 获取登录用户的IP地址
+     * @param
+     * @return String
+     * @Date 17:48 2021/02/06
+     **/
+    public String getIpAddr(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        if ("0:0:0:0:0:0:0:1".equals(ip)) {
+            ip = "127.0.0.1";
+        }
+        if (ip.split(",").length > 1) {
+            ip = ip.split(",")[0];
+        }
+        return ip;
+    }
+
+    private static final Map<Integer, String> roleMap = new HashMap<>();
+    static{
+        roleMap.put(101, "主管理员");
+        roleMap.put(102, "顾客管理员");
+        roleMap.put(103, "商品管理员");
+    }
+
+    /**
+     * @Author wfy
+     * @Description: 角色代码转换
+     * @param roleCode
+     * @return String
+     * @Date 21:54 2021/02/06
+     **/
+    public String roleCodeToName(int roleCode){
+        return roleMap.get(roleCode);
+    }
+
+
+
+
+
+
+
+
+
+
 }
