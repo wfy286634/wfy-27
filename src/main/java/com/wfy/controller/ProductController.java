@@ -73,9 +73,8 @@ public class ProductController {
      **/
     @RequestMapping("/findProductByLimit")
     @ResponseBody
-    public List<Product> findByLimit(@RequestBody Map map) {
-        System.out.println(map.get("limit"));
-        int limit = (int) map.get("limit");
+    public List<Product> findByLimit(@RequestBody Map<String,Integer> map) {
+        int limit = map.get("limit");
         if(limit<1){
             limit=0;
         }else{

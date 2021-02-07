@@ -16,4 +16,21 @@
         values(#{username},#{roleId},#{roleName},#{ip},#{loginDate},#{loginTime})
     </insert>
 
+    <delete id="deleteLog">
+        delete from login_log where logId=#{logId};
+    </delete>
+
+    <select id="queryLoginLogByLimit" resultType="java.util.Map">
+        SELECT
+            *
+        FROM
+            login_log
+        ORDER BY
+            logId DESC
+            LIMIT #{limit},10;
+    </select>
+    <select id="loginLogCount" resultType="java.lang.Integer">
+        select count(logId) from login_log
+    </select>
+
 </mapper>

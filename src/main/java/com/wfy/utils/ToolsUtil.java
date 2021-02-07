@@ -51,7 +51,7 @@ public class ToolsUtil {
         return ip;
     }
 
-    private static final Map<Integer, String> roleMap = new HashMap<>();
+    public static final Map<Integer, String> roleMap = new HashMap<>();
     static{
         roleMap.put(101, "主管理员");
         roleMap.put(102, "顾客管理员");
