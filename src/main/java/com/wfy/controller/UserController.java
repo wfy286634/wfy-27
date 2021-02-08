@@ -95,7 +95,7 @@ public class UserController {
                 //获取登录用户的IP地址
                 String ip = toolsUtil.getIpAddr(request);
                 //获取角色代码对应的权限名
-                String roleName = toolsUtil.roleCodeToName(userMsg.getRoleId());
+                String roleName = ToolsUtil.ROLE_MAP.get(userMsg.getRoleId());
                 Map<String, Object> logMap = new HashMap<>();
                 logMap.put("username", username);
                 logMap.put("roleId", userMsg.getRoleId());

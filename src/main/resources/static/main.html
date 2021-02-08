@@ -178,7 +178,9 @@
                       <td>{{item.ip}}</td>
                       <td>{{item.loginDate}}</td>
                       <td>{{item.loginTime}}</td>
-                      <td><button class="buttonx button7" @click="del4(item.logId)">删除</button></td>
+                      <td><button v-show="d" class="buttonx button7" @click="del4(item.logId)">删除</button>
+                          <button v-show="e" class="buttonx button7">无权限</button>
+                          <button v-show="f" class="buttonx button7">无权限</button></td>
                   </tr>
                   <tr>
                       <td colspan="8">
@@ -225,7 +227,10 @@
               token:token,
               a:false,
               b:false,
-              c:false
+              c:false,
+              d:false,
+              e:false,
+              f:false
           },
          mounted:function(){
              this.show();
@@ -479,14 +484,17 @@
                       that.a = true;
                       that.b = true;
                       that.c = true;
+                      that.d = true;
                       that.getUserList();
                   }
                   if (name === "商品管理员") {
                       that.c = true;
+                      that.e = true;
                       that.getProductList();
                   }
                   if (name === "用户管理员") {
                       that.b = true;
+                      that.f = true;
                       that.getCustomerList();
                   }
               },

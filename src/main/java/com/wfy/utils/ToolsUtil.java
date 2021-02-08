@@ -51,13 +51,6 @@ public class ToolsUtil {
         return ip;
     }
 
-    public static final Map<Integer, String> roleMap = new HashMap<>();
-    static{
-        roleMap.put(101, "主管理员");
-        roleMap.put(102, "顾客管理员");
-        roleMap.put(103, "商品管理员");
-    }
-
     /**
      * @Author wfy
      * @Description: 角色代码转换
@@ -65,9 +58,13 @@ public class ToolsUtil {
      * @return String
      * @Date 21:54 2021/02/06
      **/
-    public String roleCodeToName(int roleCode){
-        return roleMap.get(roleCode);
+    public static final Map<Integer, String> ROLE_MAP = new HashMap<>();
+    static{
+        ROLE_MAP.put(101, "主管理员");
+        ROLE_MAP.put(102, "顾客管理员");
+        ROLE_MAP.put(103, "商品管理员");
     }
+
 
 
 
