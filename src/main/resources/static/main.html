@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 <script type="text/javascript" src="js/interceptors.js"></script>
-<body>
+<body background="/images/github.png">
 
   <div class="container" id="app">
        <div class="header">
@@ -26,6 +26,7 @@
                   <li v-show="b" @click="getCustomerList()">顾客管理</li>
                   <li v-show="c" @click="getProductList()">商品管理</li>
                   <li  @click="getLogList()">登录日志</li>
+                  <li  @click="getSystemMsg()">关于系统</li>
               </ul>
           </div>
           <div class="right-container">
@@ -39,6 +40,8 @@
                   <button class="button6" id="save3" @click="save3()" style="vertical-align:middle"><span>添加商品</span></button>
               </h2>
               <h2 v-show="logSee" style="margin-bottom: 5px">登录日志&nbsp;
+              </h2>
+              <h2 v-show="sysMsg" style="margin-bottom: 5px">系统信息&nbsp;
               </h2>
               <hr style=" border-top:3px double #79a587;">
               <br>
@@ -119,6 +122,7 @@
                   </tr>
                   </tbody>
               </table>
+
               <table v-show="productSee" border="1" style="border-collapse: collapse">
                   <thead>
                   <tr class="table-top">
@@ -156,6 +160,7 @@
                   </tr>
                   </tbody>
               </table>
+
               <table v-show="logSee" border="1" style="border-collapse: collapse">
                   <thead>
                   <tr class="table-top">
@@ -180,7 +185,7 @@
                       <td>{{item.loginTime}}</td>
                       <td><button v-show="d" class="buttonx button7" @click="del4(item.logId)">删除</button>
                           <button v-show="e" class="buttonx button7">无权限</button>
-                          <button v-show="f" class="buttonx button7">无权限</button></td>
+                      </td>
                   </tr>
                   <tr>
                       <td colspan="8">
@@ -197,6 +202,47 @@
                   </tr>
                   </tbody>
               </table>
+
+              <div v-show="sysMsg">
+                  <table v-show="sysMsg" border="1" style="border-collapse: collapse">
+                      <thead>
+                      <tr class="table-top">
+                          <th colspan="4"><h3>关于系统</h3></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                          <td><b>软件架构</b></td>
+                          <td colspan="3">基于springboot简单搭建，静态html网页使用vue指令＋axios交互</td>
+                      </tr>
+                      <tr>
+                          <td><b>前端技术栈</b></td>
+                          <td colspan="3">HTML、CSS、VUE、axios</td>
+                      </tr>
+                      <tr>
+                          <td><b>后端技术栈</b></td>
+                          <td colspan="3"> Java1.8、springboot2.3.3、mybatis、redis、MySQL、Maven</td>
+                      </tr>
+                      <tr>
+                          <td><b>开发工具8</b></td>
+                          <td colspan="3"> IntelliJ IDEA 2020.3、Chrome、Postman、Navicat、notepad++ </td>
+                      </tr>
+                      <tr>
+                          <td><b>码云gitee</b></td>
+                          <td colspan="3">
+                              <img src="/images/gitee.png" alt="??">
+                              <a href="https://gitee.com/wangfeiyao/wfy-27">https://gitee.com/wangfeiyao/wfy-27</a>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td><b>GitHub</b></td>
+                          <td colspan="3">
+                              <img src="/images/github.png" alt="??">
+                              <a href="https://github.com/wfy286634/wfy-27">https://github.com/wfy286634/wfy-27</a></td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
           </div>
       </div>
   </div>
@@ -223,6 +269,7 @@
               userSee:false,
               CustomerSee:false,
               logSee:false,
+              sysMsg:false,
               name:name,
               token:token,
               a:false,
@@ -230,7 +277,6 @@
               c:false,
               d:false,
               e:false,
-              f:false
           },
          mounted:function(){
              this.show();
@@ -241,6 +287,26 @@
          },
           methods: {
 
+              show: function () {
+                  var that = this;
+                  if (name === "主管理员") {
+                      that.a = true;
+                      that.b = true;
+                      that.c = true;
+                      that.d = true;
+                      that.getUserList();
+                  }
+                  if (name === "商品管理员") {
+                      that.c = true;
+                      that.e = true;
+                      that.getProductList();
+                  }
+                  if (name === "用户管理员") {
+                      that.b = true;
+                      that.e = true;
+                      that.getCustomerList();
+                  }
+              },
               getUserPages:function (){
                   var that = this;
                   axios({
@@ -478,26 +544,7 @@
                   }, function (err) {
                   })
               },
-              show: function () {
-                  var that = this;
-                  if (name === "主管理员") {
-                      that.a = true;
-                      that.b = true;
-                      that.c = true;
-                      that.d = true;
-                      that.getUserList();
-                  }
-                  if (name === "商品管理员") {
-                      that.c = true;
-                      that.e = true;
-                      that.getProductList();
-                  }
-                  if (name === "用户管理员") {
-                      that.b = true;
-                      that.f = true;
-                      that.getCustomerList();
-                  }
-              },
+
               getUserList: function () {
                   var that = this;
                   axios({
@@ -512,6 +559,7 @@
                           that.CustomerSee = false;
                           that.userSee = true;
                           that.logSee=false;
+                          that.sysMsg=false;
                           that.ulist = response.data;
                       }, function (err) {
                       })
@@ -530,6 +578,7 @@
                           that.userSee = false;
                           that.CustomerSee = true;
                           that.logSee=false;
+                          that.sysMsg=false;
                           console.log(response.data)
                           that.clist = response.data;
                       }, function (err) {
@@ -549,6 +598,7 @@
                           that.CustomerSee = false;
                           that.productSee = true;
                           that.logSee=false;
+                          that.sysMsg=false;
                           that.plist = response.data
                       }, function (err) {
                       })
@@ -682,9 +732,18 @@
                           that.CustomerSee = false;
                           that.userSee = false;
                           that.logSee=true;
+                          that.sysMsg=false;
                           that.logList = response.data;
                       }, function (err) {
                       })
+              },
+              getSystemMsg:function (){
+                  var that = this;
+                  that.productSee = false;
+                  that.CustomerSee = false;
+                  that.userSee = false;
+                  that.logSee=false;
+                  that.sysMsg=true;
               }
               }
           })

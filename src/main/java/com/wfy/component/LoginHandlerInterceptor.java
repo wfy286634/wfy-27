@@ -20,9 +20,9 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //不拦截路径（登录路径等等）
-       List<String> asList = Arrays.asList("/","/images/1.jpg","/User/login","/index.html","/main.html",
-               "/test.html","/saveCustomer.html", "/saveProduct.html", "/saveUser.html","/updateCustomer.html",
-               "/updateProduct.html","/updateUser.html","/css/main.css","/js/interceptors.js");
+       List<String> asList = Arrays.asList("/","/images/1.jpg","/images/gitee.png","/images/github.png","/User/login",
+               "/index.html","/main.html", "/test.html","/saveCustomer.html", "/saveProduct.html", "/saveUser.html",
+               "/updateCustomer.html", "/updateProduct.html","/updateUser.html","/css/main.css","/js/interceptors.js");
 
        String uri = request.getRequestURI();
        //1.设置放行路径
