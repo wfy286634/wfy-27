@@ -25,7 +25,9 @@
                   <li v-show="b" @click="getCustomerList()">顾客管理</li>
                   <li v-show="c" @click="getProductList()">商品管理</li>
                   <li  @click="getLogList()">登录日志</li>
+                  <li  @click="getDruidIndex()">数据监控</li>
                   <li  @click="getSystemMsg()">关于系统</li>
+
               </ul>
           </div>
           <div class="right-container">
@@ -38,9 +40,11 @@
               <h2 v-show="productSee" style="margin-bottom: 5px">商品管理&nbsp;
                   <button class="button6" id="save3" @click="save3()" style="vertical-align:middle"><span>添加商品</span></button>
               </h2>
-              <h2 v-show="logSee" style="margin-bottom: 5px">登录日志&nbsp;
+              <h2 v-show="logSee" style="margin-bottom: 5px">登录日志
               </h2>
-              <h2 v-show="sysMsg" style="margin-bottom: 5px">系统信息&nbsp;
+              <h2 v-show="druidSee" style="margin-bottom: 5px">Druid数据源监控
+              </h2>
+              <h2 v-show="sysMsg" style="margin-bottom: 5px">系统信息
               </h2>
               <hr style=" border-top:3px double #79a587;">
               <br>
@@ -202,6 +206,10 @@
                   </tbody>
               </table>
 
+              <div v-show="druidSee">
+                  <iframe src="/druid/index.html" width="100%" height="460px"></iframe>
+              </div>
+
               <div v-show="sysMsg">
                   <table v-show="sysMsg" border="1" style="border-collapse: collapse">
                       <thead>
@@ -220,7 +228,7 @@
                       </tr>
                       <tr>
                           <td><b>后端技术栈</b></td>
-                          <td colspan="3"> Java1.8、springboot2.3.3、mybatis、redis、MySQL、Maven</td>
+                          <td colspan="3"> Java1.8、springboot2.3.3、mybatis、redis、MySQL、Druid、Maven</td>
                       </tr>
                       <tr>
                           <td><b>开发工具</b></td>
@@ -229,15 +237,17 @@
                       <tr>
                           <td><b>码云gitee</b></td>
                           <td colspan="3">
-                              <a href="https://gitee.com/wangfeiyao/wfy-27"><img src="images/2.jpg" alt="gitee" height="36" width="120"></a>
-                              <div style="margin-bottom: 10px"><a href="https://gitee.com/wangfeiyao/wfy-27">https://gitee.com/wangfeiyao/wfy-27</a></div>
+                              <div style="margin-top: 5px">
+                                  <a href="https://gitee.com/wangfeiyao/wfy-27"><img src="images/gitee.jpg" alt="gitee" height="36" width="120"></a></div>
+                              <div style="margin-bottom: 5px"><a href="https://gitee.com/wangfeiyao/wfy-27">https://gitee.com/wangfeiyao/wfy-27</a></div>
                           </td>
                       </tr>
                       <tr>
                           <td><b>GitHub</b></td>
                           <td colspan="3">
-                              <a href="https://github.com/wfy286634/wfy-27"><img src="images/3.jpg" alt="github" height="36" width="120"></a>
-                              <div style="margin-bottom: 10px"><a href="https://github.com/wfy286634/wfy-27" >https://github.com/wfy286634/wfy-27</a></div>
+                              <div style="margin-top: 5px">
+                                  <a href="https://github.com/wfy286634/wfy-27"><img src="images/github.jpg" alt="github" height="36" width="120"></a></div>
+                              <div style="margin-bottom: 5px"><a href="https://github.com/wfy286634/wfy-27" >https://github.com/wfy286634/wfy-27</a></div>
                           </td>
                       </tr>
                       </tbody>
@@ -269,6 +279,7 @@
               userSee:false,
               CustomerSee:false,
               logSee:false,
+              druidSee:false,
               sysMsg:false,
               name:name,
               token:token,
@@ -559,6 +570,7 @@
                           that.CustomerSee = false;
                           that.userSee = true;
                           that.logSee=false;
+                          that.druidSee=false;
                           that.sysMsg=false;
                           that.ulist = response.data;
                       }, function (err) {
@@ -578,6 +590,7 @@
                           that.userSee = false;
                           that.CustomerSee = true;
                           that.logSee=false;
+                          that.druidSee=false;
                           that.sysMsg=false;
                           console.log(response.data)
                           that.clist = response.data;
@@ -598,6 +611,7 @@
                           that.CustomerSee = false;
                           that.productSee = true;
                           that.logSee=false;
+                          that.druidSee=false;
                           that.sysMsg=false;
                           that.plist = response.data
                       }, function (err) {
@@ -732,17 +746,29 @@
                           that.CustomerSee = false;
                           that.userSee = false;
                           that.logSee=true;
+                          that.druidSee=false;
                           that.sysMsg=false;
                           that.logList = response.data;
                       }, function (err) {
                       })
               },
+              getDruidIndex:function (){
+                  let that = this;
+                  that.productSee = false;
+                  that.CustomerSee = false;
+                  that.userSee = false;
+                  that.logSee=false;
+                  that.druidSee=true;
+                  that.sysMsg=false;
+              },
+
               getSystemMsg:function (){
                   var that = this;
                   that.productSee = false;
                   that.CustomerSee = false;
                   that.userSee = false;
                   that.logSee=false;
+                  that.druidSee=false;
                   that.sysMsg=true;
               }
               }
