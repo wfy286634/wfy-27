@@ -10,6 +10,7 @@ import com.wfy.utils.RedisUtil;
 import com.wfy.utils.StringUtils;
 import com.wfy.utils.ToolsUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -76,6 +77,7 @@ public class UserController {
      **/
     @RequestMapping("/login")
     @ResponseBody
+    @Transactional
     public User login(@RequestBody Map<String, String> map, HttpServletRequest request) {
         String username = map.get("username");
         String password = map.get("password");

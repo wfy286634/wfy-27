@@ -28,7 +28,7 @@ spring:
       poolPreparedStatements: true
       maxPoolPreparedStatementPerConnectionSize: 20
       # 配置监控统计拦截的filters, 监控统计："stat",防SQL注入："wall",组合使用： "stat,wall"
-      filters: stat,wall，log4j
+      filters: stat,wall,log4j
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
       # 当建立新连接时被发送给JDBC驱动的连接参数

@@ -17,7 +17,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     @Resource
     private RedisUtil redisUtil;
 
-   @Override
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //不拦截路径（登录路径等等）
        List<String> asList = Arrays.asList("/","/images/1.jpg","/images/gitee.jpg","/images/github.jpg","/User/login",

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,22 +31,28 @@
               </ul>
           </div>
           <div class="right-container">
-              <h2 v-show="userSee" style="margin-bottom: 5px">用户管理&nbsp;
+              <h2 v-show="userSee">用户管理&nbsp;
                   <button class="button6" id="save1" @click="save1()" style="vertical-align:middle"><span>添加用户</span></button>
+                  <hr style=" border-top:3px double #79a587;">
               </h2>
-              <h2 v-show="CustomerSee" style="margin-bottom: 5px">顾客管理&nbsp;
+              <h2 v-show="CustomerSee">顾客管理&nbsp;
                   <button class="button6" id="save2" @click="save2()" style="vertical-align:middle"><span>添加顾客</span></button>
+                  <hr style=" border-top:3px double #79a587;">
               </h2>
-              <h2 v-show="productSee" style="margin-bottom: 5px">商品管理&nbsp;
+              <h2 v-show="productSee">商品管理&nbsp;
                   <button class="button6" id="save3" @click="save3()" style="vertical-align:middle"><span>添加商品</span></button>
+                  <hr style=" border-top:3px double #79a587;">
               </h2>
-              <h2 v-show="logSee" style="margin-bottom: 5px">登录日志
+              <h2 v-show="logSee">登录日志
+                  <hr style=" border-top:3px double #79a587;">
               </h2>
-              <h2 v-show="druidSee" style="margin-bottom: 5px">Druid数据源监控
+              <h2 v-show="druidSee">Druid数据源监控
+                  <hr style=" border-top:3px double #79a587;">
               </h2>
-              <h2 v-show="sysMsg" style="margin-bottom: 5px">系统信息
+              <h2 v-show="sysMsg">系统信息
+                  <hr style=" border-top:3px double #79a587;">
               </h2>
-              <hr style=" border-top:3px double #79a587;">
+
               <br>
               <table v-show="userSee" border="1" >
                   <thead>
@@ -207,7 +213,7 @@
               </table>
 
               <div v-show="druidSee">
-                  <iframe src="/druid/index.html" width="100%" height="460px"></iframe>
+                  <iframe src="/druid/index.html" width="100%" height="100%"></iframe>
               </div>
 
               <div v-show="sysMsg">
@@ -224,15 +230,15 @@
                       </tr>
                       <tr>
                           <td><b>前端技术栈</b></td>
-                          <td colspan="3">HTML、CSS、VUE、axios</td>
+                          <td colspan="3">HTML、CSS、JS、VUE、axios</td>
                       </tr>
                       <tr>
                           <td><b>后端技术栈</b></td>
-                          <td colspan="3"> Java1.8、springboot2.3.3、mybatis、redis、MySQL、Druid、Maven</td>
+                          <td colspan="3"> Java1.8、springboot2.3.3、mybatis、redis、MySQL、Druid、Maven、log4j</td>
                       </tr>
                       <tr>
                           <td><b>开发工具</b></td>
-                          <td colspan="3"> IntelliJ IDEA 2020.3、Chrome、Postman、Navicat、notepad++ </td>
+                          <td colspan="3"> IntelliJ IDEA 2020.3、Git、Chrome、Postman、Navicat、notepad++ </td>
                       </tr>
                       <tr>
                           <td><b>码云gitee</b></td>
