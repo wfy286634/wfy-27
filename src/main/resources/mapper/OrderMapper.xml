@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wfy.mapper.OrderMapper">
+    <update id="ChangeOrderState">
+        update order_info
+        <set>
+            <if test="orderState != ''">
+                orderState=#{orderState},
+            </if>
+            <if test="endTime!= ''">
+                endTime=#{endTime},
+            </if>
+        </set>
+        where orderId=#{orderId}
+    </update>
+    <delete id="deleteOrder">
+        delete from order_info where orderId=#{orderId}
+    </delete>
+
+    <select id="queryOrderByLimit" resultType="java.util.Map">
+        SELECT
+            *
+        FROM
+            order_info
+        WHERE
+            orderState = '1'
+        LIMIT #{limit},10;
+    </select>
+    <select id="orderCount" resultType="java.lang.Integer">
+        select count(orderId) from order_info where orderState = '1'
+    </select>
+    <select id="queryOrderHistoryByLimit" resultType="java.util.Map">
+        SELECT
+            *
+        FROM
+            order_info
+        WHERE
+            orderState = '0'
+            LIMIT #{limit},10;
+    </select>
+    <select id="orderHistoryCount" resultType="java.lang.Integer">
+        select count(orderId) from order_info where orderState = '0'
+    </select>
+
+</mapper>

@@ -1,0 +1,610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>订单管理</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<script type="text/javascript" src="js/interceptors.js"></script>
+<style type="text/css">
+    *{
+        padding: 0;
+        margin: 0;
+    }
+
+    a{
+        color: black;
+        text-decoration: none;
+    }
+    ul{
+        list-style: none;
+    }
+
+    #tab{
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 2px #ddd;
+        /* margin: 100px 0 0 100px; */
+        overflow: hidden;
+    }
+
+    /*选项卡的头部*/
+    #tab-header{
+        background-color: #c1dbde;
+        height: 34px;
+        text-align: center;
+        position: relative;
+    }
+    #tab-header ul{
+        width: 500px;
+        position: absolute;
+        left: -1px;
+    }
+    #tab-header ul li{
+        float: left;
+        width: 200px;
+        height: 34px;
+        line-height: 33px;
+        padding: 0 1px;
+        /*border: 1px solid #dddddd;*/
+    }
+    #tab-header ul li.selected{
+        background-color: white;
+        font-weight: bolder;
+        border-bottom: 0;
+        border-left: 1px solid #dddddd;
+        border-right: 1px solid #dddddd;
+        padding: 0;
+
+    }
+
+    #tab-header ul li:hover{
+        color: orangered;
+    }
+
+    /*主要内容*/
+    #tab-content .dom{
+        display: none;
+    }
+
+    #tab-content .dom ul li{
+        float: left;
+        /*background-color: red;*/
+        margin: 15px 10px;
+        width: 225px;
+    }
+
+    #tab-content .dom ul li a:hover{
+        color: orange;
+    }
+    .pageList{
+        float: right;
+        padding-right: 20px;
+    }
+
+    table
+    {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        margin-top: 20px;
+    }
+    table td, table th
+    {
+        border: 1px solid #cad9ea;
+        color: #666;
+        height: 30px;
+    }
+    table thead th
+    {
+        background-color: #CCE8EB;
+        width: 100px;
+    }
+    table tr:nth-child(odd)
+    {
+        background: #fff;
+    }
+    table tr:nth-child(even)
+    {
+        background: #F5FAFA;
+    }
+    table tr:hover {
+        background-color: #a0d2c4;
+    }
+
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 5px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #5baab1;
+    }
+
+    .button1:hover {
+        background-color: #5baab1;
+        color: white;
+    }
+
+    .button3 {
+        background-color: white;
+        color: black;
+        border: 2px solid #008CBA;
+    }
+
+    .button3:hover {
+        background-color: #008CBA;
+        color: white;
+    }
+    .button2 {
+        background-color: white;
+        color: black;
+        border: 2px solid #e7e7e7;
+        width: 25px;
+        height: 32px;
+        padding: 4px 6px;
+    }
+    .button4 {
+        background-color: white;
+        color: black;
+        border: 2px solid #e7e7e7;
+        width: 25px;
+        height: 32px;
+        padding: 4px 6px;
+    }
+    .button5 {
+        background-color: white;
+        color: black;
+        border: 2px solid #e7e7e7;
+    }
+    .button5:hover {background-color: #e7e7e7;}
+    .button4:hover {background-color: #e7e7e7;}
+    .button2:hover {background-color: #e7e7e7;}
+    .button6 {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: #7dbc8c;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 12px;
+        padding: 4px;
+        width: 90px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    .button6 span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    .button6 span:after {
+        content: "»";
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    .button6:hover span {
+        padding-right: 25px;
+    }
+
+    .button6:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+    .buttonx {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 2px 6px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    .button7 {
+        background-color: white;
+        color: #000000;
+        border: 1px solid #f44336;
+        border-radius: 8px;
+    }
+
+    .button7:hover {
+        background-color: #f44336;
+        color: white;
+    }
+    .button8 {
+        background-color: white;
+        color: black;
+        border: 1px solid #4CAF50;
+        border-radius: 8px;
+    }
+
+    .button8:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+
+<body>
+<!--选项卡-->
+<div id="tab">
+    <!--选项的头部-->
+    <div id="tab-header">
+        <ul>
+            <li class="selected">订单管理</li>
+            <li>历史订单</li>
+        </ul>
+    </div>
+    <!--主要内容-->
+    <div id="tab-content">
+        <!--订单详情-->
+        <div class="dom" style="display: block;">
+            <table class="table" style="padding-top: 20px">
+                <thead>
+                <tr class="table-top">
+                    <th>ID</th>
+                    <th>订单编号</th>
+                    <th>买家姓名</th>
+                    <th>买家地址</th>
+                    <th>买家电话</th>
+                    <th>商品名</th>
+                    <th>金额</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in orderList" :key="item.orderId">
+                    <td>{{ item.number }}</td>
+                    <td>{{item.orderNumber}}</td>
+                    <td>{{item.cName}}</td>
+                    <td>{{item.cAddress}}</td>
+                    <td>{{item.cTel}}</td>
+                    <td>{{item.productName}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.createTime}}</td>
+                    <td>
+                        <button class="buttonx button8" @click="orderDone(item.orderId)">完成</button>
+                        <button class="buttonx button8" @click="update(item.orderId)">编辑</button>
+                        <button class="buttonx button7" @click="del5(item.orderId)">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                        <div style="float: left">
+                            <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{orderPages.logTotal}}</span>>条数据</button>
+                        </div>
+                        <div class="pageList">
+                            <button class="button button1" @click="down5">上一页</button>
+                            <input class="button button2" readonly="readonly" v-model="count5"/>
+                            / <button class="button button4" readonly="readonly">{{orderPages.pages}}</button>
+                            <button class="button button3" @click="up5">下一页</button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--历史订单-->
+        <div class="dom">
+            <table class="table" style="padding-top: 20px">
+                <thead>
+                <tr class="table-top">
+                    <th>ID</th>
+                    <th>订单编号</th>
+                    <th>买家姓名</th>
+                    <th>买家地址</th>
+                    <th>买家电话</th>
+                    <th>商品名</th>
+                    <th>金额</th>
+                    <th>完成时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in orderHistoryList" :key="item.orderId">
+                    <td>{{ item.number }}</td>
+                    <td>{{item.orderNumber}}</td>
+                    <td>{{item.cName}}</td>
+                    <td>{{item.cAddress}}</td>
+                    <td>{{item.cTel}}</td>
+                    <td>{{item.productName}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.endTime}}</td>
+                    <td>
+                        <button class="buttonx button7" @click="del6(item.orderId)">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                        <div style="float: left">
+                            <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{orderHistoryPages.logTotal}}</span>>条数据</button>
+                        </div>
+                        <div class="pageList">
+                            <button class="button button1" @click="down6">上一页</button>
+                            <input class="button button2" readonly="readonly" v-model="count6"/>
+                            / <button class="button button4" readonly="readonly">{{orderHistoryPages.pages}}</button>
+                            <button class="button button3" @click="up6">下一页</button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    // == 值比较  === 类型比较 $(id) ---->  document.getElementById(id)
+    function $(id){
+        return typeof id === 'string' ? document.getElementById(id):id;
+    }
+
+    // 当页面加载完毕
+    window.onload = function(){
+        // 拿到所有的标题(li标签) 和 标题对应的内容(div)
+        var titles = $('tab-header').getElementsByTagName('li');
+        var divs = $('tab-content').getElementsByClassName('dom');
+        // 判断
+        if(titles.length !== divs.length) return;
+        // 遍历
+        for(var i=0; i<titles.length; i++){
+            // 取出li标签
+            var li = titles[i];
+            li.id = i;
+//        console.log(li);
+            // 监听鼠标的移动
+            li.onmousemove = function(){
+                for(var j=0; j<titles.length; j++){
+                    titles[j].className = '';
+                    divs[j].style.display = 'none';
+                }
+                this.className = 'selected';
+                divs[this.id].style.display = 'block';
+            }
+        }
+    }
+    
+    
+    var vm = new Vue({
+        el: '#tab',
+        data: {
+            orderList: [],
+            orderHistoryList:[],
+            count5:1,
+            count6:1,
+            orderHistoryPages:"",
+            orderPages:""
+        },
+        mounted: function () {
+            this.getOrderList();
+            this.getOrderPages();
+            this.getOrderHistoryList();
+            this.getOrderHistoryPages();
+        },
+        methods: {
+            getOrderPages:function (){
+                let that = this;
+                axios({
+                    method: "post",
+                    url: "Order/getOrderPages",
+                    data: {
+                    }
+                }).then(function (response) {
+                    that.orderPages = response.data;
+                }, function (err) {
+                })
+            },
+
+            getOrderList: function () {
+                let that = this;
+                axios({
+                    method: "post",
+                    url: "Order/queryOrderByLimit",
+                    data: {
+                        limit: 1
+                    }
+                }).then(function (response) {
+                    that.orderList = response.data
+                }, function (err) {
+                })
+            },
+            up5:function (){
+                let that = this;
+                if (that.count5===that.orderPages.pages){
+                    that.count5=that.orderPages.pages
+                }else {
+                    that.count5++;
+                }
+                var limit = that.count5;
+                axios({
+                    method: "post",
+                    url: "Order/queryOrderByLimit",
+                    data: {
+                        limit:limit
+                    }
+                }).then(function (response) {
+                    that.orderList = response.data
+                }, function (err) {
+                })
+            },
+
+            down5:function (){
+                let that = this;
+                if (that.count5===1){
+                    that.count5=1;
+                }else {
+                    that.count5--
+                }
+                let limit= that.count5;
+                axios({
+                    method: "post",
+                    url: "Order/queryOrderByLimit",
+                    data: {
+                        limit:limit
+                    }
+                }).then(function (response) {
+                    that.orderList = response.data
+                }, function (err) {
+                })
+            },
+            del5: function (orderId) {
+                if (confirm("确认删除？")) {
+                    let that = this;
+                    axios({
+                        method: "post",
+                        url: "/Order/deleteOrder",
+                        data: {
+                            orderId
+                        }
+                    }).then(function (response) {
+                        that.getOrderList();
+                        that.getOrderPages();
+                        that.count5=1;
+                    }, function (err) {
+
+                    })
+                } else {
+                }
+            },
+            orderDone: function (orderId) {
+                if (confirm("确认完成订单？")) {
+                    let that = this;
+                    axios({
+                        method: "post",
+                        url: "/Order/orderDone",
+                        data: {
+                            orderId
+                        }
+                    }).then(function (response) {
+                        that.getOrderList();
+                        that.getOrderPages();
+                        that.getOrderHistoryList();
+                        that.getOrderHistoryPages();
+                        that.count5=1;
+                    }, function (err) {
+
+                    })
+                } else {
+                }
+            },
+            update:function (orderId) {
+                sessionStorage.setItem('orderId',orderId);
+                window.location.href="updateOrder.html";
+            },
+
+            /*历史订单*/
+            getOrderHistoryPages:function (){
+                let that = this;
+                axios({
+                    method: "post",
+                    url: "Order/getOrderHistoryPages",
+                    data: {
+                    }
+                }).then(function (response) {
+                    that.orderHistoryPages = response.data;
+                }, function (err) {
+                })
+            },
+            getOrderHistoryList: function () {
+                let that = this;
+                axios({
+                    method: "post",
+                    url: "Order/queryOrderHistoryByLimit",
+                    data: {
+                        limit: 1
+                    }
+                }).then(function (response) {
+                    that.orderHistoryList = response.data
+                }, function (err) {
+                })
+            },
+            up6:function (){
+                let that = this;
+                if (that.count6===that.orderHistoryPages.pages){
+                    that.count6=that.orderHistoryPages.pages
+                }else {
+                    that.count6++;
+                }
+                var limit = that.count6;
+                axios({
+                    method: "post",
+                    url: "Order/queryOrderHistoryByLimit",
+                    data: {
+                        limit:limit
+                    }
+                }).then(function (response) {
+                    that.orderHistoryList = response.data
+                }, function (err) {
+                })
+            },
+
+            down6:function (){
+                let that = this;
+                if (that.count6===1){
+                    that.count6=1;
+                }else {
+                    that.count6--
+                }
+                let limit= that.count6;
+                axios({
+                    method: "post",
+                    url: "Order/queryOrderHistoryByLimit",
+                    data: {
+                        limit:limit
+                    }
+                }).then(function (response) {
+                    that.orderHistoryList = response.data
+                }, function (err) {
+                })
+            },
+            del6: function (orderId) {
+                if (confirm("确认删除？")) {
+                    let that = this;
+                    axios({
+                        method: "post",
+                        url: "/Order/deleteOrderHistory",
+                        data: {
+                            orderId
+                        }
+                    }).then(function (response) {
+                        that.getOrderHistoryList();
+                        that.getOrderHistoryPages();
+                        that.count6=1;
+                    }, function (err) {
+
+                    })
+                } else {
+                }
+            },
+        }
+    });
+</script>
+</html>
