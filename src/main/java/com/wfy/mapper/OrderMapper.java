@@ -22,5 +22,8 @@ public interface OrderMapper {
 
      int orderHistoryCount();
 
+     Map<String,Object> findOrderById(int orderId);
+
+     int updateOrderInfo(Map<String,Object> map);
 
 }

@@ -53,4 +53,12 @@ public class OrderServiceImpl implements OrderService {
     public int orderHistoryCount() {
         return orderMapper.orderHistoryCount();
     }
+
+    @Override
+    public void updateOrderInfo(Map<String, Object> map) {
+        Date now = new Date();
+        SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        map.put("createTime", date.format(now));
+        orderMapper.updateOrderInfo(map);
+    }
 }

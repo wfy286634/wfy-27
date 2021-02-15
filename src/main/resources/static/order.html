@@ -268,7 +268,7 @@
             <table class="table" style="padding-top: 20px">
                 <thead>
                 <tr class="table-top">
-                    <th>ID</th>
+                    <!--<th>ID</th>-->
                     <th>订单编号</th>
                     <th>买家姓名</th>
                     <th>买家地址</th>
@@ -281,7 +281,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in orderList" :key="item.orderId">
-                    <td>{{ item.number }}</td>
+                    <!--<td>{{ item.number }}</td>-->
                     <td>{{item.orderNumber}}</td>
                     <td>{{item.cName}}</td>
                     <td>{{item.cAddress}}</td>
@@ -296,7 +296,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="9">
+                    <td colspan="8">
                         <div style="float: left">
                             <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{orderPages.logTotal}}</span>>条数据</button>
                         </div>
@@ -316,7 +316,7 @@
             <table class="table" style="padding-top: 20px">
                 <thead>
                 <tr class="table-top">
-                    <th>ID</th>
+                    <!--<th>ID</th>-->
                     <th>订单编号</th>
                     <th>买家姓名</th>
                     <th>买家地址</th>
@@ -329,7 +329,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in orderHistoryList" :key="item.orderId">
-                    <td>{{ item.number }}</td>
+                   <!-- <td>{{ item.number }}</td>-->
                     <td>{{item.orderNumber}}</td>
                     <td>{{item.cName}}</td>
                     <td>{{item.cAddress}}</td>
@@ -342,7 +342,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="9">
+                    <td colspan="8">
                         <div style="float: left">
                             <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{orderHistoryPages.logTotal}}</span>>条数据</button>
                         </div>
@@ -517,7 +517,7 @@
             },
             update:function (orderId) {
                 sessionStorage.setItem('orderId',orderId);
-                window.location.href="updateOrder.html";
+                parent.location.href="updateOrder.html";
             },
 
             /*历史订单*/

@@ -14,4 +14,7 @@ public interface OrderService {
     List<Map<String,Object>> queryOrderHistoryByLimit(int limit);
 
     int orderHistoryCount();
+
+    void updateOrderInfo(Map<String,Object> map);
+
 }

@@ -15,6 +15,30 @@
         </set>
         where orderId=#{orderId}
     </update>
+    <update id="updateOrderInfo">
+        update order_info
+        <set>
+            <if test="cName != ''">
+                cName=#{cName},
+            </if>
+            <if test="cAddress!= ''">
+                cAddress=#{cAddress},
+            </if>
+            <if test="cTel != ''">
+                cTel=#{cTel},
+            </if>
+            <if test="productName!= ''">
+                productName=#{productName},
+            </if>
+            <if test="cName != ''">
+                price=#{price},
+            </if>
+            <if test="createTime!= ''">
+                createTime=#{createTime},
+            </if>
+        </set>
+        where orderId=#{orderId}
+    </update>
     <delete id="deleteOrder">
         delete from order_info where orderId=#{orderId}
     </delete>
@@ -42,6 +66,18 @@
     </select>
     <select id="orderHistoryCount" resultType="java.lang.Integer">
         select count(orderId) from order_info where orderState = '0'
+    </select>
+    <select id="findOrderById" resultType="java.util.Map">
+        SELECT
+            cName,
+            cAddress,
+            cTel,
+            productName,
+            price
+        FROM
+            order_info
+        WHERE
+            orderId=#{orderId}
     </select>
 
 </mapper>

@@ -116,4 +116,22 @@ public class OrderController {
     public void deleteOrderHistory(@RequestBody Map<String, Integer> map) {
         orderMapper.deleteOrder(map.get("orderId"));
     }
+
+    @RequestMapping("/findOrderById")
+    public Map<String, Object> findOrderById(@RequestBody Map<String, Integer> map) {
+        return orderMapper.findOrderById(map.get("orderId"));
+    }
+
+    /**
+     * @Author wfy
+     * @Description: 更新订单信息
+     * @param map
+     * @return boolean
+     * @Date 16:18 2021/02/15
+     **/
+    @RequestMapping("/updateOrder")
+    public boolean updateOrder(@RequestBody Map<String, Object> map) {
+        orderService.updateOrderInfo(map);
+        return true;
+    }
 }
