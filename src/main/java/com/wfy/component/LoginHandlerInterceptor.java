@@ -22,7 +22,8 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         //不拦截路径（登录路径等等）
        List<String> asList = Arrays.asList("/","/images/bg.jpg","/images/gitee.jpg","/images/github.jpg","/User/login",
                "/index.html","/main.html", "/test.html","/saveCustomer.html", "/saveProduct.html", "/saveUser.html",
-               "/updateCustomer.html", "/updateProduct.html","/updateUser.html","/updateOrder.html","/order.html","/css/main.css","/js/interceptors.js");
+               "/updateCustomer.html", "/updateProduct.html","/updateUser.html","/updateOrder.html","/order.html",
+               "/css/main.css","/js/interceptors.js","/favicon.ico");
 
        String uri = request.getRequestURI();
        //1.设置放行路径

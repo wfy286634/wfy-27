@@ -249,6 +249,12 @@
                           <td colspan="3"> IntelliJ IDEA 2020.3、Git、Chrome、Postman、Navicat、notepad++ </td>
                       </tr>
                       <tr>
+                          <td><b>联系我</b></td>
+                          <td colspan="3">
+                              开发者：王飞耀、我的邮箱：507060892@qq.com
+                          </td>
+                      </tr>
+                      <tr>
                           <td><b>码云gitee</b></td>
                           <td colspan="3">
                               <div style="margin-top: 5px">
@@ -271,8 +277,8 @@
       </div>
   </div>
 
-  <script>
-      var name = sessionStorage.getItem('roleName');
+  <script type="text/javascript">
+      let name = sessionStorage.getItem('roleName');
       let token =  localStorage.getItem("uToken");
       var vm = new Vue({
           el:'#app',
@@ -312,9 +318,8 @@
              this.getLogPages();
          },
           methods: {
-
               show: function () {
-                  var that = this;
+                  let that = this;
                   if (name === "主管理员") {
                       that.a = true;
                       that.b = true;
@@ -334,7 +339,7 @@
                   }
               },
               getUserPages:function (){
-                  var that = this;
+                  let that = this;
                   axios({
                       method: "post",
                       url: "User/getUserPages",
@@ -346,7 +351,7 @@
                   })
               },
               getCustomerPages:function (){
-                  var that = this;
+                  let that = this;
                   axios({
                       method: "post",
                       url: "Customer/getCustomerPages",
@@ -358,7 +363,7 @@
                   })
               },
               getProductPages:function (){
-                  var that = this;
+                  let that = this;
                   axios({
                       method: "post",
                       url: "Product/getProductPages",
@@ -370,7 +375,7 @@
                   })
               },
               getLogPages:function (){
-                  var that = this;
+                  let that = this;
                   axios({
                       method: "post",
                       url: "loginLog/getLogPages",
@@ -382,13 +387,13 @@
                   })
               },
               up1:function (){
-                  var that = this;
+                  let that = this;
                   if (that.count1===that.upages.pages){
                       that.count1=that.upages.pages
                   }else {
                       that.count1++;
                   }
-                  var limit = that.count1;
+                  let limit = that.count1;
                   axios({
                       method: "post",
                       url: "User/findUserByLimit",
@@ -405,7 +410,7 @@
                   })
               },
               down1:function (){
-                  var that = this;
+                  let that = this;
                   if (that.count1===1){
                       that.count1=1;
                   }else {
@@ -429,7 +434,7 @@
               },
 
               up2:function (){
-                  var that = this;
+                  let that = this;
                   if (that.count2===that.cpages.pages){
                       that.count2=that.cpages.pages;
                   }else {
@@ -451,9 +456,8 @@
                   }, function (err) {
                   })
               },
-
               down2:function (){
-                  var that = this;
+                  let that = this;
                   if (that.count2===1){
                       that.count2=1;
                   }else {
@@ -475,8 +479,9 @@
                   }, function (err) {
                   })
               },
+
               up3:function (){
-                  var that = this;
+                  let that = this;
                   if (that.count3===that.ppages.pages){
                       that.count3=that.ppages.pages
                   }else {
@@ -498,9 +503,8 @@
                       }, function (err) {
                       })
               },
-
               down3:function (){
-                  var that = this;
+                  let that = this;
                   if (that.count3===1){
                       that.count3=1;
                   }else {
@@ -524,7 +528,7 @@
               },
 
               up4:function (){
-                  var that = this;
+                  let that = this;
                   if (that.count4===that.LogPages.pages){
                       that.count4=that.LogPages.pages
                   }else {
@@ -546,9 +550,8 @@
                   }, function (err) {
                   })
               },
-
               down4:function (){
-                  var that = this;
+                  let that = this;
                   if (that.count4===1){
                       that.count4=1;
                   }else {
@@ -572,7 +575,7 @@
               },
 
               getUserList: function () {
-                  var that = this;
+                  let that = this;
                   axios({
                       method: "post",
                       url: "User/findUserAndRoles",
@@ -593,7 +596,7 @@
                       })
               },
               getCustomerList: function () {
-                  var that = this;
+                  let that = this;
                   axios({
                       method: "post",
                       url: "Customer/findAllCustomer",
@@ -615,7 +618,7 @@
                       })
               },
               getProductList: function () {
-                  var that = this;
+                  let that = this;
                   axios({
                       method: "post",
                       url: "Product/findAllProduct",
@@ -637,7 +640,7 @@
               },
               del1: function (id) {
                   if (confirm("确认删除？")) {
-                      var that = this;
+                      let that = this;
                       axios({
                           method: "post",
                           url: "/User/deleteUser",
@@ -656,7 +659,7 @@
               },
               del2: function (id) {
                   if (confirm("确认删除？")) {
-                      var that = this;
+                      let that = this;
                       axios({
                           method: "post",
                           url: "/Customer/deleteCustomer",
@@ -675,7 +678,7 @@
               },
               del3: function (id) {
                   if (confirm("确认删除？")) {
-                      var that = this;
+                      let that = this;
                       axios({
                           method: "post",
                           url: "/Product/deleteProduct",
@@ -695,7 +698,7 @@
               },
               del4: function (logId) {
                   if (confirm("确认删除？")) {
-                      var that = this;
+                      let that = this;
                       axios({
                           method: "post",
                           url: "/loginLog/deleteLog",
@@ -735,7 +738,6 @@
                   window.location.href="updateProduct.html";
               },
               logout:function () {
-                  var that = this;
                   axios({
                       method: "post",
                       url: "/User/logout",
@@ -751,7 +753,7 @@
                   })
               },
               getLogList:function (){
-                  var that = this;
+                  let that = this;
                   axios({
                       method: "post",
                       url: "loginLog/findLogByLimit",
@@ -792,7 +794,7 @@
                   that.sysMsg=false;
               },
               getSystemMsg:function (){
-                  var that = this;
+                  let that = this;
                   that.productSee = false;
                   that.CustomerSee = false;
                   that.userSee = false;
