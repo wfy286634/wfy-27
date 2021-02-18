@@ -170,7 +170,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     background-color: white;
     color: black;
     border: 2px solid #e7e7e7;
-    width: 25px;
+    /*width: 25px;*/
     height: 32px;
     padding: 4px 6px;
 }
