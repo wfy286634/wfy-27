@@ -44,7 +44,6 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
        Object tokenUser = redisUtil.get(token);
        if(StringUtils.toString(tokenUser).equals("null")){
            response.setContentType("application/json; charset=utf-8");
-          // response.sendRedirect("/index.html");
            response.getWriter().print("{\"success\":false,\"msg\":\"NoUser\"}");
            return false;
        }
