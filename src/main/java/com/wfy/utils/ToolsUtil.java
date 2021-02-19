@@ -5,9 +5,16 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 public class ToolsUtil {
+
+    private static final String pattern = "^Mozilla/\\d\\.\\d\\s+\\(+.+?\\)";
+    private static final String pattern2 = "\\(+.+?\\)";
+    private static final Pattern r = Pattern.compile(pattern);
+    private static final Pattern r2 = Pattern.compile(pattern2);
 
     /**
      * @Author wfy
@@ -66,13 +73,33 @@ public class ToolsUtil {
     }
 
 
+    /**
+     * @Author wfy
+     * @Description: 获取登录设备信息
+     * @param request
+     * @return String
+     * @Date 17:36 2021/02/19
+     **/
+    public String getDeviceInfo(HttpServletRequest request) {
+        String userAgent = request.getHeader("User-Agent");
+        Matcher m = r.matcher(userAgent);
+        String result = null;
+        if (m.find()) {
+            result = m.group(0);
+        }
 
-
-
-
-
-
-
-
+        Matcher m2 = r2.matcher(result);
+        if (m2.find()) {
+            result = m2.group(0);
+        }
+        result = result.replace("(", "");
+        result = result.replace(")", "");
+        if (StringUtils.isBlank(result)) {
+            return null;
+        }
+        result = result.replace(" U;", "");
+        result = result.replace(" zh-cn;", "");
+        return result;
+    }
 
 }

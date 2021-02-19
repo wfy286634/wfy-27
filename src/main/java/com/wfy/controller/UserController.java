@@ -98,11 +98,14 @@ public class UserController {
                 String ip = toolsUtil.getIpAddr(request);
                 //获取角色代码对应的权限名
                 String roleName = ToolsUtil.ROLE_MAP.get(userMsg.getRoleId());
+                //获取登录设备信息
+                String deviceInfo = toolsUtil.getDeviceInfo(request);
                 Map<String, Object> logMap = new HashMap<>();
                 logMap.put("username", username);
                 logMap.put("roleId", userMsg.getRoleId());
                 logMap.put("roleName", roleName);
                 logMap.put("ip",ip);
+                logMap.put("deviceInfo",deviceInfo);
                 logMap.put("loginDate", dateFormat1.format(now));
                 logMap.put("loginTime", dateFormat2.format(now));
                 loginLogService.addLoginLog(logMap);

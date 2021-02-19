@@ -78,7 +78,7 @@ td{
 }
 th{
     height:45px;
-    width: 100%;
+   /* width: 100%;*/
 }
 #name{
     position: fixed;
@@ -276,7 +276,7 @@ table td, table th
 table thead th
 {
     background-color: #c1dbde;
-    width: 100px;
+   /* width: 100px;*/
 }
 table tr:nth-child(odd)
 {
@@ -289,3 +289,9 @@ table tr:nth-child(even)
 table tr:hover {
     background-color: #a0d2c4;
 }
+ .a{
+     word-break:keep-all;
+     white-space:nowrap;
+     overflow:hidden;
+     text-overflow:ellipsis;
+ }

@@ -12,8 +12,8 @@
     </resultMap>-->
 
     <insert id="addLoginLog" parameterType="map">
-        insert into login_log(username,roleId,roleName,ip,loginDate,loginTime)
-        values(#{username},#{roleId},#{roleName},#{ip},#{loginDate},#{loginTime})
+        insert into login_log(username,roleId,roleName,ip,deviceInfo,loginDate,loginTime)
+        values(#{username},#{roleId},#{roleName},#{ip},#{deviceInfo},#{loginDate},#{loginTime})
     </insert>
 
     <delete id="deleteLog">

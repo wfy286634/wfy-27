@@ -181,6 +181,7 @@
                       <th>用户名</th>
                       <th>角色代码</th>
                       <th>角色名</th>
+                      <th width="240">登录设备</th>
                       <th>登录IP</th>
                       <th>登录日期</th>
                       <th>登录时间</th>
@@ -193,15 +194,16 @@
                       <td>{{item.username}}</td>
                       <td>{{item.roleId}}</td>
                       <td>{{item.roleName}}</td>
+                      <td :title="item.deviceInfo" class="a">{{item.deviceInfo}}</td>
                       <td>{{item.ip}}</td>
-                      <td>{{item.loginDate}}</td>
+                      <td :title="item.loginDate" class="a">{{item.loginDate}}</td>
                       <td>{{item.loginTime}}</td>
                       <td><button v-show="d" class="buttonx button7" @click="del4(item.logId)">删除</button>
                           <button v-show="e" class="buttonx button7">无权限</button>
                       </td>
                   </tr>
                   <tr>
-                      <td colspan="8">
+                      <td colspan="9">
                           <div style="float: left">
                               <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{LogPages.logTotal}}</span>>条数据</button>
                           </div>

@@ -90,17 +90,24 @@
         border-collapse: collapse;
         text-align: center;
         margin-top: 20px;
+        table-layout:fixed;
+    }
+    .a{
+        word-break:keep-all;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
     }
     table td, table th
     {
         border: 1px solid #cad9ea;
         color: #666;
-        height: 30px;
+        height: 36px;
     }
     table thead th
     {
         background-color: #CCE8EB;
-        width: 100px;
+        /*width: 100px;*/
     }
     table tr:nth-child(odd)
     {
@@ -253,27 +260,25 @@
             <table class="table" style="padding-top: 20px">
                 <thead>
                 <tr class="table-top">
-                    <!--<th>ID</th>-->
-                    <th>订单编号</th>
-                    <th>买家姓名</th>
+                    <th width="90">订单编号</th>
+                    <th width="90">买家姓名</th>
                     <th>买家地址</th>
-                    <th>买家电话</th>
-                    <th>商品名</th>
-                    <th>金额</th>
+                    <th width="130">买家电话</th>
+                    <th width="90">商品名</th>
+                    <th width="70">金额</th>
                     <th>创建时间</th>
-                    <th>操作</th>
+                    <th width="170">操作</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="item in orderList" :key="item.orderId">
-                    <!--<td>{{ item.number }}</td>-->
-                    <td>{{item.orderNumber}}</td>
-                    <td>{{item.cName}}</td>
-                    <td>{{item.cAddress}}</td>
-                    <td>{{item.cTel}}</td>
-                    <td>{{item.productName}}</td>
-                    <td>{{item.price}}</td>
-                    <td>{{item.createTime}}</td>
+                    <td :title="item.orderNumber" class="a">{{item.orderNumber}}</td>
+                    <td :title="item.cName" class="a">{{item.cName}}</td>
+                    <td :title="item.cAddress" class="a">{{item.cAddress}}</td>
+                    <td :title="item.cTel" class="a">{{item.cTel}}</td>
+                    <td :title="item.productName" class="a">{{item.productName}}</td>
+                    <td :title="item.price" class="a">{{item.price}}</td>
+                    <td :title="item.createTime" class="a">{{item.createTime}}</td>
                     <td>
                         <button class="buttonx button8" @click="orderDone(item.orderId)">完成</button>
                         <button class="buttonx button8" @click="update(item.orderId)">编辑</button>
@@ -301,27 +306,25 @@
             <table class="table" style="padding-top: 20px">
                 <thead>
                 <tr class="table-top">
-                    <!--<th>ID</th>-->
-                    <th>订单编号</th>
-                    <th>买家姓名</th>
+                    <th width="90">订单编号</th>
+                    <th width="90">买家姓名</th>
                     <th>买家地址</th>
-                    <th>买家电话</th>
-                    <th>商品名</th>
-                    <th>金额</th>
+                    <th width="130">买家电话</th>
+                    <th width="90">商品名</th>
+                    <th width="70">金额</th>
                     <th>完成时间</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="item in orderHistoryList" :key="item.orderId">
-                   <!-- <td>{{ item.number }}</td>-->
-                    <td>{{item.orderNumber}}</td>
-                    <td>{{item.cName}}</td>
-                    <td>{{item.cAddress}}</td>
-                    <td>{{item.cTel}}</td>
-                    <td>{{item.productName}}</td>
-                    <td>{{item.price}}</td>
-                    <td>{{item.endTime}}</td>
+                    <td :title="item.orderNumber" class="a">{{item.orderNumber}}</td>
+                    <td :title="item.cName" class="a">{{item.cName}}</td>
+                    <td :title="item.cAddress" class="a">{{item.cAddress}}</td>
+                    <td :title="item.cTel" class="a">{{item.cTel}}</td>
+                    <td :title="item.productName" class="a">{{item.productName}}</td>
+                    <td :title="item.price" class="a">{{item.price}}</td>
+                    <td :title="item.endTime" class="a">{{item.endTime}}</td>
                     <td>
                         <button class="buttonx button7" @click="del6(item.orderId)">删除</button>
                     </td>
