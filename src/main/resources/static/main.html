@@ -105,6 +105,7 @@
                       <th>密码</th>
                       <th>年龄</th>
                       <th>城市</th>
+                      <th>电话</th>
                       <th>操作</th>
                   </tr>
                   </thead>
@@ -115,13 +116,14 @@
                       <td>{{item.cPassword}}</td>
                       <td>{{item.age}}</td>
                       <td>{{item.address}}</td>
+                      <td>{{item.tel}}</td>
                       <td>
                           <button class="buttonx button7" @click="del2(item.id)">删除</button>
                           &nbsp;&nbsp;<button class="buttonx button8" @click="update2(item.id)">编辑</button>
                       </td>
                   </tr>
                   <tr>
-                      <td colspan="6">
+                      <td colspan="7">
                           <div style="float: left">
                               <button class="button button5" readonly="readonly">共<<span style="color: #008CBA">{{cpages.customerTotal}}</span>>条数据</button>
                           </div>
@@ -253,7 +255,7 @@
                       <tr>
                           <td><b>联系我</b></td>
                           <td colspan="3">
-                              开发者：王飞耀、我的邮箱：507060892@qq.com
+                              开发者：王飞耀&nbsp;&nbsp;&nbsp;我的邮箱：w15738958256@163.com
                           </td>
                       </tr>
                       <tr>

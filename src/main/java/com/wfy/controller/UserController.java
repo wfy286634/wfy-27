@@ -89,7 +89,6 @@ public class UserController {
                 String token = UUID.randomUUID().toString();
                 //存到redis，并设置20分钟过期时间
                 redisUtil.set(token, JSON.toJSONString(userMsg),60*20);
-
                 //记录登录日志
                 Date now = new Date();
                 SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");

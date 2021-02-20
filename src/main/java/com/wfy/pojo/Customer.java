@@ -8,6 +8,15 @@ public class Customer {
     private Integer age;
     private String address;
 
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    private String tel;
     private Integer number;
 
     public Integer getNumber() {

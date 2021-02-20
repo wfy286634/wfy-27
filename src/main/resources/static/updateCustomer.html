@@ -111,7 +111,10 @@
 				<input type="text" v-model="address"
 					placeholder="输入客户地址" />
 			</div>
-
+			<div class="lgD">电话
+				<input type="text" v-model="tel"
+					   placeholder="输入用户电话" />
+			</div>
 			<div class="logC">
 				<a><button @click="save">更 新</button></a>
 			</div>
@@ -123,11 +126,12 @@
     var app =new Vue({
      el: '#wrap',
        data: {
-          cName: "",
-          cPassword: "",
-          age:"",
-		  address:"",
-		  id:id
+           cName: "",
+           cPassword: "",
+           age:"",
+		   address:"",
+		   tel:"",
+		   id:id
        },
 	  mounted:function(){
      	cid=this.id;
@@ -141,11 +145,12 @@
 				 method: "post",
 				 url: "/Customer/updateCustomer",
 				 data: {
-				 	    id:that.id,
-				 cName:that.cName,
-				 cPassword: that.cPassword,
-				 age: that.age,
-				 address: that.address,
+					 id:that.id,
+					 cName:that.cName,
+					 cPassword: that.cPassword,
+					 age: that.age,
+					 address: that.address,
+					 tel:that.tel
 				 }
 			 }).then(function (response) {
 				 if (response.data == true) {
@@ -170,6 +175,7 @@
 				 that.cPassword = response.data.cPassword;
 				 that.age = response.data.age;
 				 that.address = response.data.address;
+				 that.tel = response.data.tel;
 			 }, function (err) {
 
 			 })

@@ -85,7 +85,7 @@
         width: 100%;
         border-collapse: collapse;
         text-align: center;
-        margin-top: 20px;
+        margin-top: 10px;
         table-layout:fixed;
     }
     .a{
@@ -149,7 +149,7 @@
     }
 
     .button3:hover {
-        background-color: #008CBA;
+        background-color: #008cba;
         color: white;
     }
     .button2 {
@@ -236,6 +236,17 @@
         background-color: #4CAF50;
         color: white;
     }
+    .button9 {
+        background-color: white;
+        color: black;
+        border: 1px solid #008CBA;
+        border-radius: 8px;
+    }
+
+    .button9:hover {
+        background-color: #008CBA;
+        color: white;
+    }
 </style>
 
 <body>
@@ -252,7 +263,7 @@
     <div id="tab-content">
         <!--订单详情-->
         <div class="dom" style="display: block;">
-            <table class="table" style="padding-top: 20px">
+            <table class="table">
                 <thead>
                 <tr class="table-top">
                     <th width="90">订单编号</th>
@@ -275,7 +286,7 @@
                     <td :title="item.price" class="a">{{item.price}}</td>
                     <td :title="item.createTime" class="a">{{item.createTime}}</td>
                     <td>
-                        <button class="buttonx button8" @click="orderDone(item.orderId)">完成</button>
+                        <button class="buttonx button9" @click="orderDone(item.orderId)">完成</button>
                         <button class="buttonx button8" @click="update(item.orderId)">编辑</button>
                         <button class="buttonx button7" @click="del5(item.orderId)">删除</button>
                     </td>
@@ -298,7 +309,7 @@
         </div>
         <!--历史订单-->
         <div class="dom">
-            <table class="table" style="padding-top: 20px">
+            <table class="table">
                 <thead>
                 <tr class="table-top">
                     <th width="90">订单编号</th>
@@ -308,7 +319,7 @@
                     <th width="90">商品名</th>
                     <th width="70">金额</th>
                     <th>完成时间</th>
-                    <th>操作</th>
+                    <th width="130">操作</th>
                 </tr>
                 </thead>
                 <tbody>

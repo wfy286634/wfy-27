@@ -9,8 +9,8 @@
     </select>
 
     <insert id="saveCustomer" parameterType="com.wfy.pojo.Customer">
-         insert into customer(cName,cPassword,age,address)
-                values(#{cName},#{cPassword},#{age},#{address})
+         insert into customer(cName,cPassword,age,address,tel)
+                values(#{cName},#{cPassword},#{age},#{address},#{tel})
     </insert>
 
     <update id="updateCustomer" parameterType="com.wfy.pojo.Customer">
@@ -27,6 +27,9 @@
             </if>
             <if test="address != ''">
                 address=#{address},
+            </if>
+            <if test="tel != ''">
+                tel=#{tel},
             </if>
         </set>
         where id=#{id}

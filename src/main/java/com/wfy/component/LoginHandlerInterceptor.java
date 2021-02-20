@@ -49,7 +49,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
        }
 
        //4.如果没有过期，那么就重新将token和登录用户信息存到redis
-       redisUtil.set(token, tokenUser,60*30);
+       redisUtil.set(token, tokenUser,60*20);
        return true;
     }
 }

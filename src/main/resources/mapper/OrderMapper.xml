@@ -62,6 +62,9 @@
             order_info
         WHERE
             orderState = '0'
+        ORDER BY
+            endTime
+            DESC
             LIMIT #{limit},10;
     </select>
     <select id="orderHistoryCount" resultType="java.lang.Integer">

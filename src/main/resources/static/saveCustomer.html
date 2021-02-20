@@ -25,7 +25,7 @@
 	}
 
 	#wrap .logGet {
-		height: 580px;
+		height: 670px;
 		width: 368px;
 		background-color: #FFFFFF;
 		top: 5%;
@@ -111,8 +111,10 @@
 				<input type="text" v-model="address"
 					placeholder="输入用户城市" />
 			</div>
-			
-
+			<div class="lgD">电话
+				<input type="text" v-model="tel"
+					   placeholder="输入用户电话" />
+			</div>
 			<div class="logC">
 				<a><button @click="save">添 加</button></a>
 			</div>
@@ -126,7 +128,8 @@
           cName: "",
           cPassword: "",
           age:"",
-		  address:""
+		  address:"",
+		  tel:""
        },
      methods: {
        save:function() {
@@ -135,10 +138,11 @@
                  method:"post",
                  url:"/Customer/saveCustomer",
                  data:{
-                   cName:that.cName,
-                   cPassword:that.cPassword,
-				   age:that.age,
-				   address:that.address
+                     cName:that.cName,
+                     cPassword:that.cPassword,
+				     age:that.age,
+				     address:that.address,
+					 tel:that.tel
                  }
               }).then(function (response){
               	    if(response.data==true){
