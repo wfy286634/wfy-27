@@ -1,6 +1,6 @@
 Vue.prototype.$http=axios;  //给axios配置原型
 axios.defaults.baseURL='http://localhost:8080/'; //给axios请求设置访问后台的前缀
-
+axios.defaults.withCredentials = true
 //!**************前台拦截器**************
 
 //1 使用axios前置拦截器，让所有的请求都携带uToken
@@ -29,3 +29,4 @@ axios.interceptors.response.use(function (result){
 },error => {
     Promise.reject(error);
 });
+

@@ -12,9 +12,12 @@
 <body>
   <div class="container" id="app">
        <div class="header">
-           <div id="headtext">&nbsp;&nbsp;商城后台管理系统</div>
+          <!-- <div id="headtext">&nbsp;&nbsp;商城后台管理系统</div>-->
+           <div class="image">
+               <img src="images/logo.png" width="390" height="80" style="margin-top: 10px;margin-left: 8px">
+           </div>
               <div id="name">
-                  <p v-text>&nbsp;{{ name }}</p>
+                  <p>&nbsp;{{ name }}</p>
                   <button class="button6" @click="logout" style="vertical-align:middle;background-color: #8a86865c"><span>退出</span></button>
               </div>
        </div>
@@ -106,7 +109,7 @@
                       <th>年龄</th>
                       <th>城市</th>
                       <th>电话</th>
-                      <th>操作</th>
+                      <th width="160px">操作</th>
                   </tr>
                   </thead>
                   <tbody>
