@@ -130,28 +130,32 @@
        },
      methods: {
        save:function() {
-          let that=this;
-          axios({
-                 method:"post",
-                 url:"/Product/saveProduct",
-                 data:{
-                   commodity:that.commodity,
-                   brand:that.brand,
-				   price:that.price,
-				   amount:that.amount
-                 }
-              }).then(function (response){
-              	    if(response.data==true){
-						console.log(response.data)
-						alert("添加成功 ！！！")
-						window.location.href="main.html"
-					}
-               },function(err){
-              	console.log(err.data)
-		  })
-            }
-          }
-      })
+           let that=this;
+		   if(that.commodity===""||that.brand===""||that.price===""||that.amount===""){
+			   alert("存在未填写项！！")
+		   }else {
+			   axios({
+				   method: "post",
+				   url: "/Product/saveProduct",
+				   data: {
+					   commodity: that.commodity,
+					   brand: that.brand,
+					   price: that.price,
+					   amount: that.amount
+				   }
+			   }).then(function (response) {
+				   if (response.data == true) {
+					   console.log(response.data)
+					   alert("添加成功 ！！！")
+					   window.location.href = "main.html"
+				   }
+			   }, function (err) {
+				   console.log(err.data)
+			   })
+		   }
+	     }
+	  }
+	})
 </script>
 </body>
 </html>

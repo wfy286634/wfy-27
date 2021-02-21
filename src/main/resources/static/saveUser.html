@@ -128,26 +128,30 @@
      methods: {
        save:function() {
           let that=this;
-          axios({
-                 method:"post",
-                 url:"/User/saveUser",
-                 data:{
-                   username:that.username,
-                   password:that.password,
-				   roleId:that.roleId
-                 }
-              }).then(function (response){
-              	    if(response.data===true){
-						console.log(response.data)
-						alert("添加成功 ！！！")
-						window.location.href="main.html"
-					}
-               },function(err){
-              	console.log(err.data)
-		  })
-            }
-          }
-      })
+		   if (that.username === "" || that.password === ""||that.roleId === "") {
+			   alert("存在未填写项！！")
+		   } else {
+			   axios({
+				   method: "post",
+				   url: "/User/saveUser",
+				   data: {
+					   username: that.username,
+					   password: that.password,
+					   roleId: that.roleId
+				   }
+			   }).then(function (response) {
+				   if (response.data === true) {
+					   console.log(response.data)
+					   alert("添加成功 ！！！")
+					   window.location.href = "main.html"
+				   }
+			   }, function (err) {
+				   console.log(err.data)
+			   })
+		   }
+	     }
+	  }
+    })
 </script>
 </body>
 </html>

@@ -137,25 +137,29 @@
      methods: {
 		 save: function () {
 			 let that = this;
-			 axios({
-				 method: "post",
-				 url: "/Product/updateProduct",
-				 data: {
-				 	id:that.id,
-				 commodity :that.commodity,
-				 brand : that.brand,
-				 price : that.price,
-				 amount : that.amount
-				 }
-			 }).then(function (response) {
-				 if (response.data == true) {
-					 console.log(response.data)
-					 alert("更新成功 ！！！")
-					 window.location.href = "main.html"
-				 }
-			 }, function (err) {
-				 console.log(err.data)
-			 })
+			 if(that.commodity===""||that.brand===""||that.price===""||that.amount===""){
+				 alert("存在未填写项！！")
+			 }else {
+				 axios({
+					 method: "post",
+					 url: "/Product/updateProduct",
+					 data: {
+						 id: that.id,
+						 commodity: that.commodity,
+						 brand: that.brand,
+						 price: that.price,
+						 amount: that.amount
+					 }
+				 }).then(function (response) {
+					 if (response.data == true) {
+						 console.log(response.data)
+						 alert("更新成功 ！！！")
+						 window.location.href = "main.html"
+					 }
+				 }, function (err) {
+					 console.log(err.data)
+				 })
+			 }
 		 },
 		 findById: function (id) {
 			 let that = this;

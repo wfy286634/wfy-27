@@ -140,26 +140,30 @@
         methods: {
             save: function () {
                 let that = this;
-                axios({
-                    method: "post",
-                    url: "/Order/updateOrder",
-                    data: {
-                        orderId:that.orderId,
-                        cName :that.cName,
-                        cAddress : that.cAddress,
-                        price : that.price,
-                        cTel:that.cTel,
-                        productName : that.productName
-                    }
-                }).then(function (response) {
-                    if (response.data === true) {
-                        console.log(response.data)
-                        alert("更新成功 ！！！")
-                        top.location.href = "main.html"
-                    }
-                }, function (err) {
-                    console.log(err.data)
-                })
+                if (that.cName === "" || that.cAddress === "" || that.cTel === ""|| that.price === ""|| that.productName === "") {
+                    alert("存在未填写项！！")
+                } else {
+                    axios({
+                        method: "post",
+                        url: "/Order/updateOrder",
+                        data: {
+                            orderId: that.orderId,
+                            cName: that.cName,
+                            cAddress: that.cAddress,
+                            price: that.price,
+                            cTel: that.cTel,
+                            productName: that.productName
+                        }
+                    }).then(function (response) {
+                        if (response.data === true) {
+                            console.log(response.data)
+                            alert("更新成功 ！！！")
+                            top.location.href = "main.html"
+                        }
+                    }, function (err) {
+                        console.log(err.data)
+                    })
+                }
             },
             findById: function (orderId) {
                 let that = this;

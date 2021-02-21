@@ -141,26 +141,30 @@
      methods: {
 		 save: function () {
 			 let that = this;
-			 axios({
-				 method: "post",
-				 url: "/Customer/updateCustomer",
-				 data: {
-					 id:that.id,
-					 cName:that.cName,
-					 cPassword: that.cPassword,
-					 age: that.age,
-					 address: that.address,
-					 tel:that.tel
-				 }
-			 }).then(function (response) {
-				 if (response.data == true) {
-					 console.log(response.data)
-					 alert("更新成功 ！！！")
-					 window.location.href = "main.html"
-				 }
-			 }, function (err) {
-				 console.log(err.data)
-			 })
+			 if(that.cName===""||that.cPassword===""||that.age===""||that.address===""||that.tel===""){
+				 alert("存在未填写项！！")
+			 }else {
+				 axios({
+					 method: "post",
+					 url: "/Customer/updateCustomer",
+					 data: {
+						 id: that.id,
+						 cName: that.cName,
+						 cPassword: that.cPassword,
+						 age: that.age,
+						 address: that.address,
+						 tel: that.tel
+					 }
+				 }).then(function (response) {
+					 if (response.data == true) {
+						 console.log(response.data)
+						 alert("更新成功 ！！！")
+						 window.location.href = "main.html"
+					 }
+				 }, function (err) {
+					 console.log(err.data)
+				 })
+			 }
 		 },
 		 findById: function (cid) {
 			 let that = this;
