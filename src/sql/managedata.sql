@@ -222,6 +222,5 @@ INSERT INTO `user` VALUES (21, 'bob', '303030', 101);
 INSERT INTO `user` VALUES (29, 'igoudala', '3r5325', 103);
 INSERT INTO `user` VALUES (31, 'wfy', '111111', 101);
 INSERT INTO `user` VALUES (32, 'wfy02', '123456', 102);
-INSERT INTO `user` VALUES (33, '张欣蓓大美女', 'zxbmv', 101);
 
 SET FOREIGN_KEY_CHECKS = 1;
