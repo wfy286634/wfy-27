@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true
 //1 使用axios前置拦截器，让所有的请求都携带uToken
 axios.interceptors.request.use(config=>{
     //获取到浏览器里面一直存储的token
-    let uToken =  localStorage.getItem("uToken");
+    let uToken =  sessionStorage.getItem("uToken");
     if(uToken){
         //给请求头里面添加uToken（后台判断就是取的这个请求头）请求头，并把随机数的token值也设置进去
         config.headers['token']=uToken;

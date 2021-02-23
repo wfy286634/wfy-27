@@ -104,7 +104,7 @@ CREATE TABLE `order_info`  (
   `cTel` varchar(30) NOT NULL COMMENT '买家电话',
   `productName` varchar(50) NOT NULL COMMENT '商品名',
   `price` varchar(30) NOT NULL COMMENT '价格',
-  `orderState` int(2) NOT NULL COMMENT '订单状态：1进行中，0完成',
+  `orderState` int(2) NOT NULL COMMENT '订单状态：1未完成，0完成',
   `createTime` varchar(30) NOT NULL COMMENT '订单创建时间',
   `endTime` varchar(30) NULL DEFAULT NULL COMMENT '订单完成时间',
   PRIMARY KEY (`orderId`) USING BTREE

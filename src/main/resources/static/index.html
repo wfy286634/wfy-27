@@ -106,8 +106,8 @@
                         let data = response.data;
                         if (data.msg === "0") {
                             sessionStorage.setItem('roleName', data.rolesList[0].roleName);
-                            localStorage.setItem("uToken", data.token);
-                            localStorage.setItem("tokenUser", data.username);
+                            sessionStorage.setItem("uToken", data.token);
+                            sessionStorage.setItem("tokenUser", data.username);
                             window.location.href = "main.html"
                         }
                         if (data.msg === "1") {

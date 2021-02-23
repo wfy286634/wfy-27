@@ -82,7 +82,7 @@
                       <td>
                           <button class="buttonx button7" @click="del1(item.id)">删除</button>
                           &nbsp;&nbsp;<button class="buttonx button8" @click="update1(item.id)">编辑</button>
-                          </td>
+                      </td>
                   </tr>
                   <tr>
                       <td colspan="6">
@@ -286,7 +286,7 @@
 
   <script type="text/javascript">
       let name = sessionStorage.getItem('roleName');
-      let token =  localStorage.getItem("uToken");
+      let token =  sessionStorage.getItem("uToken");
       var vm = new Vue({
           el:'#app',
           data:{
@@ -745,19 +745,23 @@
                   window.location.href="updateProduct.html";
               },
               logout:function () {
-                  axios({
-                      method: "post",
-                      url: "/User/logout",
-                      data: {
-                          token:token
-                      }
-                  }).then(function (response) {
-                      sessionStorage.removeItem('roleName');
-                      sessionStorage.removeItem('Id');
-                      window.location.href="index.html";
-                  }, function (err) {
+                  if (confirm("确认退出？")) {
+                      axios({
+                          method: "post",
+                          url: "/User/logout",
+                          data: {
+                              token:token
+                          }
+                      }).then(function (response) {
+                          sessionStorage.removeItem('roleName');
+                          sessionStorage.removeItem('Id');
+                          window.location.href="index.html";
+                      }, function (err) {
 
-                  })
+                      })
+                  }else{
+
+                  }
               },
               getLogList:function (){
                   let that = this;

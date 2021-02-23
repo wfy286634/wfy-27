@@ -71,7 +71,7 @@ public class UserController {
     /**
      * @Author wfy
      * @Description: 用户登录
-     * @param map,session
+     * @param map,request
      * @return User
      * @Date 23:06 2021/01/30
      **/
@@ -170,6 +170,12 @@ public class UserController {
         map.put("pages", pages);
         map.put("userTotal", userCount);
         return map;
+    }
+
+    @RequestMapping("/checkUser")
+    @ResponseBody
+    public void checkUser() {
+
     }
 
 }

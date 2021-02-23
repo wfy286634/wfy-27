@@ -125,6 +125,16 @@
           password: "",
           roleId:""
        },
+		mounted:function(){
+			axios({
+				method:"post",
+				url:"/User/checkUser",
+				data:{
+				}
+			}).then(function (response){
+			},function(err){
+			})
+		},
      methods: {
        save:function() {
           let that=this;
