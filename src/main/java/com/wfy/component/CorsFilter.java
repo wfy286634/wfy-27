@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * @Author wfy
- * @Description: 解决跨域问题
+ * @Description: 自定义过滤器解决跨域问题
  * @Date 13:46 2021/02/16
  **/
 @Component

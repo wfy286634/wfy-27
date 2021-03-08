@@ -16,11 +16,6 @@ import java.util.regex.Pattern;
 @Component
 public class ToolsUtil {
 
-    private static final String pattern = "^Mozilla/\\d\\.\\d\\s+\\(+.+?\\)";
-    private static final String pattern2 = "\\(+.+?\\)";
-    private static final Pattern r = Pattern.compile(pattern);
-    private static final Pattern r2 = Pattern.compile(pattern2);
-
     /**
      * @Author wfy
      * @Description: 计算数据的总页数（10条为一页，将int数据对10取整，有余数+1）
@@ -85,6 +80,12 @@ public class ToolsUtil {
      * @return String
      * @Date 17:36 2021/02/19
      **/
+
+    private static final String pattern = "^Mozilla/\\d\\.\\d\\s+\\(+.+?\\)";
+    private static final String pattern2 = "\\(+.+?\\)";
+    private static final Pattern r = Pattern.compile(pattern);
+    private static final Pattern r2 = Pattern.compile(pattern2);
+
     public String getDeviceInfo(HttpServletRequest request) {
         String userAgent = request.getHeader("User-Agent");
         Matcher m = r.matcher(userAgent);

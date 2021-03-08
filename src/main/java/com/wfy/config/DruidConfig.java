@@ -12,15 +12,18 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @Author wfy
+ * @Description: Druid数据源配置类
+ * @Date 21:47 2021/02/02
+ **/
 public class DruidConfig {
-
 
     @Bean(name = "default_datadatasource")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource(){
         return new DruidDataSource();
     }
-
 
     @Bean
     public ServletRegistrationBean druidServlet() {

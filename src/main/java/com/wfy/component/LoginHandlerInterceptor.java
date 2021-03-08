@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @Author wfy
+ * @Description: 自定义请求拦截器
+ * @Date 21:45 2021/03/08
+ **/
 @Component
 public class LoginHandlerInterceptor implements HandlerInterceptor {
 
