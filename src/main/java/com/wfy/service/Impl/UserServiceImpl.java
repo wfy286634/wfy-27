@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int checkUserName(String username) {
+        return userMapper.checkUserName(username);
+    }
+
+    @Override
     public void saveUser(User user) {
         userMapper.saveUser(user);
     }

@@ -92,4 +92,7 @@
     <select id="userCount" resultType="java.lang.Integer">
         select count(id) from USER
     </select>
+    <select id="checkUserName" resultType="java.lang.Integer" parameterType="String">
+        select COUNT(username) FROM user where username=#{username};
+    </select>
 </mapper>

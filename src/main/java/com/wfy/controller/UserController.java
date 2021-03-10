@@ -50,6 +50,11 @@ public class UserController {
     @RequestMapping("/saveUser")
     @ResponseBody
     public boolean saveUser(@RequestBody User user){
+        String username = user.getUsername();
+        int i = userService.checkUserName(username);
+        if(i==1){
+            return false;
+        }
         userService.saveUser(user);
         return true;
     }

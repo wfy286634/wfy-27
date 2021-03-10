@@ -26,4 +26,6 @@ public interface UserMapper {
 
     int userCount();
 
+    int checkUserName(String username);
+
 }

@@ -19,4 +19,6 @@ public interface UserService {
     User findByName(String username,String password);
 
     List<User> findByLimit(int limit);
+
+    int checkUserName(String username);
 }
