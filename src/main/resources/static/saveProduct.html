@@ -93,7 +93,7 @@
 	<div class="logGet">
 
 			<div class="logD logDtip">
-				<p class="p1">添加产品</p>
+				<p class="p1">添加商品</p>
 			</div>
 			<div class="lgD">产品名
 				<input type="text" v-model="commodity"
@@ -119,8 +119,9 @@
 		</div>
 </div>	
 
-	<script type="text/javascript">
-		var app =new Vue({
+<script type="text/javascript">
+	sessionStorage.setItem("msgCode", "3");
+	var app =new Vue({
      el: '#wrap',
        data: {
           commodity: "",
@@ -154,7 +155,7 @@
 					   amount: that.amount
 				   }
 			   }).then(function (response) {
-				   if (response.data == true) {
+				   if (response.data === true) {
 					   console.log(response.data)
 					   alert("添加成功 ！！！")
 					   window.location.href = "main.html"

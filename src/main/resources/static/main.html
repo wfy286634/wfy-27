@@ -14,7 +14,7 @@
        <div class="header">
           <!-- <div id="headtext">&nbsp;&nbsp;商城后台管理系统</div>-->
            <div class="image">
-               <img src="images/logo.png" width="390" height="80" style="margin-top: 10px;margin-left: 8px">
+               <img src="images/logo.png" width="390" height="80" style="margin-top: 10px;margin-left: 8px" alt="logo">
            </div>
               <div id="name">
                   <p>&nbsp;{{ name }}</p>
@@ -287,6 +287,7 @@
   <script type="text/javascript">
       let name = sessionStorage.getItem('roleName');
       let token =  sessionStorage.getItem("uToken");
+      let msgCode = sessionStorage.getItem("msgCode");
       var vm = new Vue({
           el:'#app',
           data:{
@@ -311,6 +312,7 @@
               sysMsg:false,
               name:name,
               token:token,
+              msgCode:msgCode,
               a:false,
               b:false,
               c:false,
@@ -323,6 +325,22 @@
              this.getProductPages();
              this.getUserPages();
              this.getLogPages();
+             if (msgCode==="1"){
+                 this.getUserList();
+                 sessionStorage.setItem("msgCode", "0");
+             }
+             if (msgCode==="2"){
+                 this.getCustomerList();
+                 sessionStorage.setItem("msgCode", "0");
+             }
+             if (msgCode==="3"){
+                 this.getProductList();
+                 sessionStorage.setItem("msgCode", "0");
+             }
+             if (msgCode==="4"){
+                 this.getOrderIndex();
+                 sessionStorage.setItem("msgCode", "0");
+             }
          },
           methods: {
               show: function () {

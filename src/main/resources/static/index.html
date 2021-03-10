@@ -108,6 +108,7 @@
                             sessionStorage.setItem('roleName', data.rolesList[0].roleName);
                             sessionStorage.setItem("uToken", data.token);
                             sessionStorage.setItem("tokenUser", data.username);
+                            sessionStorage.setItem("msgCode", "0");
                             window.location.href = "main.html"
                         }
                         if (data.msg === "1") {

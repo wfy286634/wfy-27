@@ -118,6 +118,7 @@
 		</div>
 </div>
 <script type="text/javascript">
+	sessionStorage.setItem("msgCode", "1");
 	var app =new Vue({
      el: '#wrap',
        data: {
@@ -152,8 +153,9 @@
 			   }).then(function (response) {
 				   if (response.data === true) {
 					   console.log(response.data)
-					   alert("添加成功 ！！！")
 					   window.location.href = "main.html"
+				   } else {
+					   alert("此用户名已被注册！！")
 				   }
 			   }, function (err) {
 				   console.log(err.data)

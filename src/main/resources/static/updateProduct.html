@@ -93,7 +93,7 @@
 	<div class="logGet">
 
 			<div class="logD logDtip">
-				<p class="p1">更新顾客信息</p>
+				<p class="p1">更新商品信息</p>
 			</div>
 			<div class="lgD">产品名
 				<input type="text" v-model="commodity"
@@ -120,6 +120,7 @@
 </div>
 <script type="text/javascript">
 	var id  = sessionStorage.getItem('Id');
+	sessionStorage.setItem("msgCode", "3");
     var app =new Vue({
      el: '#wrap',
        data: {
@@ -151,7 +152,7 @@
 						 amount: that.amount
 					 }
 				 }).then(function (response) {
-					 if (response.data == true) {
+					 if (response.data === true) {
 						 console.log(response.data)
 						 alert("更新成功 ！！！")
 						 window.location.href = "main.html"
